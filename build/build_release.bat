@@ -45,6 +45,7 @@ copy ..\src\lib\Eto.Platform.Windows\LICENSE.txt %LICDIR%\Eto.Platform.Windows.t
 copy ..\src\lib\Eto.Platform.Wpf\LICENSE.txt %LICDIR%\Eto.Platform.Wpf.txt || exit /b 1
 copy ..\LICENSE.txt %LICDIR%\LICENSE.txt || exit /b 1
 copy ..\NOTICE.txt %LICDIR%\NOTICE.txt || exit /b 1
+
 endlocal
 
 @echo *** BUILD SUCCESSFUL ***
