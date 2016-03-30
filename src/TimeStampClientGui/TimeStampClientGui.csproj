@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9C02275A-4665-428B-9BFA-DF1D70C320F3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Disig.TimeStampClient.Gui</RootNamespace>
+    <AssemblyName>TimeStampClientGui</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <DoNotCopyLocalIfInGac>true</DoNotCopyLocalIfInGac>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>TimeStampClient.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="crypto">
+      <HintPath>..\lib\Portable.BouncyCastle\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\lib\Eto.Forms\Eto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.Gtk2">
+      <HintPath>..\lib\Eto.Platform.Gtk\Eto.Gtk2.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.Gtk3">
+      <HintPath>..\lib\Eto.Platform.Gtk3\Eto.Gtk3.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.Mac">
+      <HintPath>..\lib\Eto.Platform.Mac\Eto.Mac.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.WinForms">
+      <HintPath>..\lib\Eto.Platform.Windows\Eto.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.Wpf">
+      <HintPath>..\lib\Eto.Platform.Wpf\Eto.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip.Reduced">
+      <HintPath>..\lib\DotNetZip.Reduced\Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMac">
+      <HintPath>..\lib\Eto.Platform.Mac\MonoMac.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutDialog.cs" />
+    <Compile Include="ComboItemFormat.cs" />
+    <Compile Include="ClientSettings.cs" />
+    <Compile Include="SharedUtils.cs" />
+    <Compile Include="XmlSerializer.cs" />
+    <Compile Include="ComboItemCertReq.cs" />
+    <Compile Include="ComboItemHash.cs" />
+    <Compile Include="MainForm.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TimeStampClient.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimeStampClient\TimeStampClient.csproj">
+      <Project>{41a8cfeb-6de0-49d3-84b6-4aca04459a92}</Project>
+      <Name>TimeStampClient</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
