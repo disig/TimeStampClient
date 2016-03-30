@@ -88,7 +88,7 @@ namespace Disig.TimeStampClient
             }
 
             Request request = new Request(hashedMessage, hashAlg, nonce_bytes, policy, certReq);
-            return Client.RequestTimeStampToken(tsaService, request, credentials);
+            return TimeStampClient.RequestTimeStampToken(tsaService, request, credentials);
         }
 
         public static void SaveResponse(string destinationFile, TimeStampToken timeStampToken)

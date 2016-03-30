@@ -30,7 +30,7 @@ namespace Disig.TimeStampClient
     /// <summary>
     /// Provides interface to time-stamp data.
     /// </summary>
-    public static class Client
+    public static class TimeStampClient
     {
         #region RequestTimeStamp
 
