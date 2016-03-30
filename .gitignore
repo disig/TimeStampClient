@@ -1,0 +1,8 @@
+[Bb]in/
+[Oo]bj/
+*.userprefs
+test-results/
+TestResults/
+*.suo
+*.user
+**/packages/*
