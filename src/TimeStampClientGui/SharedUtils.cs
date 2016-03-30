@@ -81,7 +81,7 @@ namespace Disig.TimeStampClient
         public static TimeStampToken RequestTST(string fileName, string tsaService, Oid hashAlg, string policy, string nonce, bool certReq, UserCredentials credentials)
         {
             byte[] nonce_bytes = null;
-            byte[] hashedMessage = Utils.ComputeDigest(fileName, hashAlg);
+            byte[] hashedMessage = DigestUtils.ComputeDigest(fileName, hashAlg);
             if (!string.IsNullOrEmpty(nonce))
             {
                 nonce_bytes = SharedUtils.HexStringToBytes(nonce);

@@ -116,7 +116,7 @@ namespace Disig.TimeStampClient
                 digestType = Oid.SHA512;
             }
 
-            byte[] digest = Utils.ComputeDigest(dataToTimestamp, digestType);
+            byte[] digest = DigestUtils.ComputeDigest(dataToTimestamp, digestType);
             Request request = new Request(digest, digestType.OID);
             return RequestTST(tsaUri, request, credentials);
         }

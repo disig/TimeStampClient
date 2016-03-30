@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DigestUtils.cs" />
     <Compile Include="TimeStampToken.cs" />
     <Compile Include="TsaId.cs" />
     <Compile Include="PkiStatus.cs" />

@@ -19,84 +19,13 @@
 *  Marek KLEIN <kleinmrk@gmail.com>
 */
 
-using System.IO;
-using System.Security.Cryptography;
-
 namespace Disig.TimeStampClient
 {
     /// <summary>
     /// Utils functions.
     /// </summary>
-    public static class Utils
+    internal static class Utils
     {
-        /// <summary>
-        /// Computes digest of the data.
-        /// </summary>
-        /// <param name="dataStream">Data stream to compute digest for.</param>
-        /// <param name="digestType">Defines hash algorithm to be used to compute digest.</param>
-        /// <returns>digest stored in a byte array</returns>
-        public static byte[] ComputeDigest(Stream dataStream, Oid digestType)
-        {
-            HashAlgorithm digestAlg = null;
-            try
-            {
-                if (Oid.MD5 == digestType)
-                {
-                    digestAlg = new MD5CryptoServiceProvider();
-                }
-                else if (Oid.SHA1 == digestType)
-                {
-                    digestAlg = new SHA1CryptoServiceProvider();
-                }
-                else if (Oid.SHA256 == digestType)
-                {
-                    digestAlg = new SHA256Managed();
-                }
-                else if (Oid.SHA512 == digestType)
-                {
-                    digestAlg = new SHA512Managed();
-                }
-                else
-                {
-                    throw new CryptographicException("Unsupported hash algorithm.");
-                }
-
-                return digestAlg.ComputeHash(dataStream);
-            }
-            finally
-            {
-                digestAlg.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// Computes digest of the file.
-        /// </summary>
-        /// <param name="pathToFile">Path to file to compute digest for.</param>
-        /// <param name="digestType">Defines hash algorithm to be used to compute digest.</param>
-        /// <returns>digest stored in a byte array</returns>
-        public static byte[] ComputeDigest(string pathToFile, Oid digestType)
-        {
-            using (FileStream fs = new FileStream(pathToFile, FileMode.Open, FileAccess.Read))
-            {
-                return ComputeDigest(fs, digestType);
-            }
-        }
-
-        /// <summary>
-        /// Computes digest of the data.
-        /// </summary>
-        /// <param name="data">Data to compute digest for.</param>
-        /// <param name="digestType">Defines hash algorithm to be used to compute digest.</param>
-        /// <returns>digest stored in a byte array</returns>
-        public static byte[] ComputeDigest(byte[] data, Oid digestType)
-        {
-            using (MemoryStream ms = new MemoryStream(data))
-            {
-                return ComputeDigest(ms, digestType);
-            }
-        }
-
         /// <summary>
         /// Compares byte arrays.
         /// </summary>
