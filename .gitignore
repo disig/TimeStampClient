@@ -6,3 +6,4 @@ TestResults/
 *.suo
 *.user
 **/packages/*
+**/TimeStampClient-Release/*
