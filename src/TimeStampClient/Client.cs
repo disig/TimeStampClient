@@ -405,7 +405,7 @@ namespace Disig.TimeStampClient
                     throw new TimeStampException("Invalid TS response: nonce mismatch", response.PKIStatus);
                 }
 
-                if (null != request.ReqPolicy && 0 != string.CompareOrdinal(response.TST.PolicyOid, request.ReqPolicy))
+                if (!string.IsNullOrEmpty(request.ReqPolicy) && 0 != string.CompareOrdinal(response.TST.PolicyOid, request.ReqPolicy))
                 {
                     throw new TimeStampException("Invalid TS response: policy mismatch", response.PKIStatus);
                 }
