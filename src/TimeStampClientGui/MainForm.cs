@@ -572,7 +572,7 @@ namespace Disig.TimeStampClient.Gui
                 },
             };
 
-            authPage.Text = "Authorization";
+            authPage.Text = "Authentication";
             authPage.Content = new TableLayout
             {
                 Padding = 10,
