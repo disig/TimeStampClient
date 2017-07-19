@@ -30,7 +30,7 @@ TimeStampToken token = TimeStampClient.RequestTimeStampToken("http://localhost/t
 ```
 
 ### TimeStampClient command line application
-[Mono runtime](http://www.mono-project.com/) is required to use TimeStampClient applications on Linux and Mac OS X.
+[Mono runtime](http://www.mono-project.com/) is required to use TimeStampClient applications on Linux (requires package `mono-complete`) and Mac OS X.
 
 Getting time-stamp using the command line application on Windows:
 ```
