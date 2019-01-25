@@ -36,25 +36,15 @@ copy ..\src\TimeStampClientGui\bin\Release\BouncyCastle.Crypto.dll %OUTDIR% || e
 copy ..\src\TimeStampClientGui\bin\Release\Eto.Wpf.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\Eto.WinForms.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\MonoMac.dll %OUTDIR% || exit /b 1
-copy ..\src\TimeStampClientGui\bin\Release\Eto.Mac.dll %OUTDIR% || exit /b 1
-copy ..\src\TimeStampClientGui\bin\Release\Eto.Gtk3.dll %OUTDIR% || exit /b 1
-copy ..\src\TimeStampClientGui\bin\Release\Eto.Gtk2.dll %OUTDIR% || exit /b 1
+copy ..\src\TimeStampClientGui\bin\Release\Eto.Mac64.dll %OUTDIR% || exit /b 1
+copy ..\src\TimeStampClientGui\bin\Release\Eto.Gtk.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\Eto.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\Ionic.Zip.Reduced.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientCmd\bin\Release\TimeStampClientCmd.exe %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientCmd\bin\Release\TimeStampClientCmd.exe.config %OUTDIR% || exit /b 1
 
 @rem Copy licenses to the output directory
-copy ..\src\lib\DotNetZip.Reduced\LICENSE.txt %LICDIR%\DotNetZip.Reduced.txt || exit /b 1
-copy ..\src\lib\Eto.Forms\LICENSE.txt %LICDIR%\Eto.Forms.txt || exit /b 1
-copy ..\src\lib\Eto.Platform.Gtk\LICENSE.txt %LICDIR%\Eto.Platform.Gtk.txt || exit /b 1
-copy ..\src\lib\Eto.Platform.Gtk3\LICENSE.txt %LICDIR%\Eto.Platform.Gtk3.txt || exit /b 1
-copy ..\src\lib\Eto.Platform.Mac\LICENSE.txt %LICDIR%\Eto.Platform.Mac.txt || exit /b 1
-copy ..\src\lib\Eto.Platform.Mac\MonoMac-License.txt %LICDIR%\MonoMac.txt || exit /b 1
-copy ..\src\lib\Eto.Platform.Windows\LICENSE.txt %LICDIR%\Eto.Platform.Windows.txt || exit /b 1
-copy ..\src\lib\Eto.Platform.Wpf\LICENSE.txt %LICDIR%\Eto.Platform.Wpf.txt || exit /b 1
-copy ..\LICENSE.txt %LICDIR%\LICENSE.txt || exit /b 1
-copy ..\NOTICE.txt %LICDIR%\NOTICE.txt || exit /b 1
+copy license\*.txt %LICDIR% || exit /b 1
 
 endlocal
 
