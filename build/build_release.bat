@@ -1,11 +1,21 @@
 setlocal
 
-@rem Initialize build environment of Visual Studio 2015
-call "c:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\vsvars32.bat"
+@rem Initialize Visual Studio build environment:
+@rem - Visual Studio 2017 Community/Professional/Enterprise is the preferred option
+@set tools=
+@set tmptools="c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsMSBuildCmd.bat"
+@if exist %tmptools% set tools=%tmptools%
+@set tmptools="c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools\VsMSBuildCmd.bat"
+@if exist %tmptools% set tools=%tmptools%
+@set tmptools="c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
+@if exist %tmptools% set tools=%tmptools%
+@if not defined tools goto :error
+call %tools%
+@echo on
 
 @rem Build for AnyCPU platform
 msbuild ..\src\DisigTimeStamp.sln /p:Configuration=Release /p:Platform="Any CPU" /target:Clean || exit /b 1
-msbuild ..\src\DisigTimeStamp.sln /p:Configuration=Release /p:Platform="Any CPU" /target:Build || exit /b 1
+msbuild ..\src\DisigTimeStamp.sln /p:Configuration=Release /p:Platform="Any CPU" /target:Restore /target:ReBuild || exit /b 1
 
 endlocal
 
@@ -22,7 +32,7 @@ mkdir %LICDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\TimeStampClientGui.exe %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\TimeStampClientGui.exe.config %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\TimeStampClient.dll %OUTDIR% || exit /b 1
-copy ..\src\TimeStampClientGui\bin\Release\crypto.dll %OUTDIR% || exit /b 1
+copy ..\src\TimeStampClientGui\bin\Release\BouncyCastle.Crypto.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\Eto.Wpf.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\Eto.WinForms.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\MonoMac.dll %OUTDIR% || exit /b 1
