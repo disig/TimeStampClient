@@ -86,7 +86,7 @@
     <PackageReference Include="Eto.Platform.Gtk3">
       <Version>2.4.1</Version>
     </PackageReference>
-    <PackageReference Include="Eto.Platform.Mac">
+    <PackageReference Include="Eto.Platform.Mac64">
       <Version>2.4.1</Version>
     </PackageReference>
     <PackageReference Include="Eto.Platform.Windows">
