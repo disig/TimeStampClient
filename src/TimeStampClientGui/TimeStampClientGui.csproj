@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -7,7 +7,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Disig.TimeStampClient.Gui</RootNamespace>
     <AssemblyName>TimeStampClientGui</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <DoNotCopyLocalIfInGac>true</DoNotCopyLocalIfInGac>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -41,33 +41,6 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="crypto">
-      <HintPath>..\lib\Portable.BouncyCastle\crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto">
-      <HintPath>..\lib\Eto.Forms\Eto.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Gtk2">
-      <HintPath>..\lib\Eto.Platform.Gtk\Eto.Gtk2.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Gtk3">
-      <HintPath>..\lib\Eto.Platform.Gtk3\Eto.Gtk3.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Mac">
-      <HintPath>..\lib\Eto.Platform.Mac\Eto.Mac.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.WinForms">
-      <HintPath>..\lib\Eto.Platform.Windows\Eto.WinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Eto.Wpf">
-      <HintPath>..\lib\Eto.Platform.Wpf\Eto.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Ionic.Zip.Reduced">
-      <HintPath>..\lib\DotNetZip.Reduced\Ionic.Zip.Reduced.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMac">
-      <HintPath>..\lib\Eto.Platform.Mac\MonoMac.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -96,6 +69,35 @@
       <Project>{41a8cfeb-6de0-49d3-84b6-4aca04459a92}</Project>
       <Name>TimeStampClient</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DotNetZip.Reduced">
+      <Version>1.9.1.8</Version>
+    </PackageReference>
+    <PackageReference Include="Eto.Forms">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Eto.Platform.Gtk">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Eto.Platform.Gtk2">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Eto.Platform.Gtk3">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Eto.Platform.Mac">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Eto.Platform.Windows">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Eto.Platform.Wpf">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Portable.BouncyCastle">
+      <Version>1.8.4</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
