@@ -37,7 +37,8 @@ copy ..\src\TimeStampClientGui\bin\Release\Eto.Wpf.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\Eto.WinForms.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\MonoMac.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\Eto.Mac64.dll %OUTDIR% || exit /b 1
-copy ..\src\TimeStampClientGui\bin\Release\Eto.Gtk.dll %OUTDIR% || exit /b 1
+copy ..\src\TimeStampClientGui\bin\Release\Eto.Gtk2.dll %OUTDIR% || exit /b 1
+copy ..\src\TimeStampClientGui\bin\Release\Eto.Gtk3.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\Eto.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientGui\bin\Release\Ionic.Zip.Reduced.dll %OUTDIR% || exit /b 1
 copy ..\src\TimeStampClientCmd\bin\Release\TimeStampClientCmd.exe %OUTDIR% || exit /b 1
