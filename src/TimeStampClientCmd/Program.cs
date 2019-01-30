@@ -151,7 +151,7 @@ namespace Disig.TimeStampClient.Cmd
             if (string.IsNullOrEmpty(error))
             {
                 Console.WriteLine(Assembly.GetExecutingAssembly().GetName().Name + " " + Assembly.GetExecutingAssembly().GetName().Version);
-                Console.WriteLine(@"Copyright (c) 2016 Disig a.s. <http://www.disig.sk>");
+                Console.WriteLine(@"Copyright (c) 2016-2019 Disig a.s. <http://www.disig.sk>");
                 Console.WriteLine();
             }
             else
