@@ -3,6 +3,7 @@
 *.userprefs
 test-results/
 TestResults/
+src/.vs/*
 *.suo
 *.user
 **/packages/*
