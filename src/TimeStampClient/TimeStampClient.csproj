@@ -32,8 +32,8 @@
   </PropertyGroup>
   
   <ItemGroup Label="PackExtraContent">
-   <None Include="LICENSE.txt" pack="true" PackagePath="." />
-   <None Include="NOTICE.txt" pack="true" PackagePath="." />
+   <None Include="../../build/license/LICENSE.txt" pack="true" PackagePath="." />
+   <None Include="../../build/license/NOTICE.txt" pack="true" PackagePath="." />
   </ItemGroup>
  
   <ItemGroup Label="Package References">
