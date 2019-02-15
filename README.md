@@ -11,9 +11,9 @@ TimeStampClient:
 * contains reusable .NET library
 
 ## Download
-[TimeStampClient-1.0.0.zip](https://github.com/disig/TimeStampClient/releases/download/v1.0.0/TimeStampClient-1.0.0.zip) contains command line tool, GUI application and library. Same archive can be used on all supported operating systems (Windows, Linux, Mac OS X).
+Release archive [TimeStampClient.zip](https://github.com/disig/TimeStampClient/releases/latest) contains command line tool, GUI application and library. Same archive can be used on all supported operating systems (Windows, Linux, Mac OS X).
 
-NuGet package is available at [TimeStampClient.1.0.0.nupkg](https://github.com/disig/TimeStampClient/releases/download/v1.0.0/TimeStampClient.1.0.0.nupkg).
+Official [NuGet package](https://www.nuget.org/packages/TimeStampClient/) is published in nuget.org repository.
 
 ## Usage
 ### TimeStampClient Library
@@ -30,7 +30,7 @@ TimeStampToken token = TimeStampClient.RequestTimeStampToken("http://localhost/t
 ```
 
 ### TimeStampClient command line application
-[Mono runtime](http://www.mono-project.com/) is required to use TimeStampClient applications on Linux (requires package `mono-complete`) and Mac OS X.
+[Mono runtime](https://www.mono-project.com/) is required to use TimeStampClient applications on Linux (requires `mono-complete` package) and Mac OS X.
 
 Getting time-stamp using the command line application on Windows:
 ```
@@ -56,7 +56,8 @@ User needs to specify the URL of a time-stamping authority in the "TSA service U
 
 
 ## License
-TimeStampClient library and applications are available under the terms of the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+TimeStampClient library and applications are available under the terms of the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).  
+[Human friendly license summary](https://tldrlegal.com/l/apache2) is available at tldrlegal.com but the [full license text](LICENSE.txt) always prevails.
 
 ## About
 TimeStampClient library and applications are provided by [Disig a.s.](https://www.disig.sk/)
