@@ -7,4 +7,6 @@ src/.vs/*
 *.suo
 *.user
 **/packages/*
-**/TimeStampClient-Release/*
+/build/application
+/build/nuget
+/build/nuget-signed
