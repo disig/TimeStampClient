@@ -164,8 +164,8 @@ namespace Disig.TimeStampClient.Gui
             this.ComponentsTextArea.ReadOnly = true;
             this.ComponentsTextArea.Text = string.Empty;
             this.ComponentsTextArea.Append(@"TimeStampClient uses following 3rd party components (in alphabetical order):" + Environment.NewLine
-                + Environment.NewLine + "- DotNetZip.Reduced" + Environment.NewLine + "- Eto.Forms" + Environment.NewLine + "- Eto.Platform.Gtk" + Environment.NewLine
-                + "- Eto.Platform.Gtk3" + Environment.NewLine + "- Eto.Platform.Mac" + Environment.NewLine
+                + Environment.NewLine + "- DotNetZip.Reduced" + Environment.NewLine + "- Eto.Forms" + Environment.NewLine + "- Eto.Platform.Gtk2" + Environment.NewLine
+                + "- Eto.Platform.Gtk3" + Environment.NewLine + "- Eto.Platform.Mac64" + Environment.NewLine
                 + "- Eto.Platform.Windows" + Environment.NewLine + "- Eto.Platform.Wpf" + Environment.NewLine + "- Portable.BouncyCastle"
                 + Environment.NewLine + Environment.NewLine + "Full license text for each of these components can be found in the installation directory.");
         }
@@ -177,7 +177,7 @@ namespace Disig.TimeStampClient.Gui
             this.LicenseTextArea.Append(@"Copyright (c) 2016-2019 Disig a.s." + Environment.NewLine);
             this.LicenseTextArea.Append(Environment.NewLine + "Licensed under the Apache License, Version 2.0 (the \"License\"); " +
                                         "you may not use this file except in compliance with the License. You may obtain a copy of the License at " +
-                                        Environment.NewLine + Environment.NewLine + "http://www.apache.org/licenses/LICENSE-2.0" + Environment.NewLine + Environment.NewLine +
+                                        Environment.NewLine + Environment.NewLine + "https://www.apache.org/licenses/LICENSE-2.0" + Environment.NewLine + Environment.NewLine +
                                         "Unless required by applicable law or agreed to in writing, software distributed under the License is " +
                                         "distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. " +
                                         "See the License for the specific language governing permissions and limitations under the License." + Environment.NewLine);
