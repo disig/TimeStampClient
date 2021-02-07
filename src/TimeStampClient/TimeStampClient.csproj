@@ -15,9 +15,9 @@
     <Version>1.1.0</Version>
     <PackageId>TimeStampClient</PackageId>
     <Copyright>Copyright 2016-2019 Disig a.s.</Copyright>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/disig/TimeStampClient/1.1.0/LICENSE.txt</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/disig/TimeStampClient</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/disig/TimeStampClient/master/doc/icons/TimeStampClient.png</PackageIconUrl>
+    <PackageIcon>TimeStampClient.png</PackageIcon>
     <RepositoryUrl>https://github.com/disig/TimeStampClient.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>trusted timestamp time-stamp trust time stamp security crypto cryptography</PackageTags>
@@ -34,6 +34,7 @@
   <ItemGroup Label="PackExtraContent">
    <None Include="../../build/license/LICENSE.txt" pack="true" PackagePath="." />
    <None Include="../../build/license/NOTICE.txt" pack="true" PackagePath="." />
+   <None Include="../../doc/icons/TimeStampClient.png" pack="true" PackagePath="." />
   </ItemGroup>
  
   <ItemGroup Label="Package References">
