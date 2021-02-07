@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Disig a.s.")]
 [assembly: AssemblyProduct("TimeStampClient")]
-[assembly: AssemblyCopyright("Copyright 2016-2019 Disig a.s.")]
+[assembly: AssemblyCopyright("Copyright 2016-2021 Disig a.s.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

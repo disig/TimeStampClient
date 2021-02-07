@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2019 Disig a.s.
+*  Copyright 2016-2021 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -151,7 +151,7 @@ namespace Disig.TimeStampClient.Cmd
             if (string.IsNullOrEmpty(error))
             {
                 Console.WriteLine(Assembly.GetExecutingAssembly().GetName().Name + " " + Assembly.GetExecutingAssembly().GetName().Version);
-                Console.WriteLine(@"Copyright (c) 2016-2019 Disig a.s. <http://www.disig.sk>");
+                Console.WriteLine(@"Copyright (c) 2016-2021 Disig a.s. <http://www.disig.sk>");
                 Console.WriteLine();
             }
             else

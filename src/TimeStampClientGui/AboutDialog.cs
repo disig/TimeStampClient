@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2019 Disig a.s.
+*  Copyright 2016-2021 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -174,7 +174,7 @@ namespace Disig.TimeStampClient.Gui
         {
             this.LicenseTextArea.ReadOnly = true;
             this.LicenseTextArea.Append(@"TimeStampClient " + SharedUtils.AppVersion + Environment.NewLine);
-            this.LicenseTextArea.Append(@"Copyright (c) 2016-2019 Disig a.s." + Environment.NewLine);
+            this.LicenseTextArea.Append(@"Copyright (c) 2016-2021 Disig a.s." + Environment.NewLine);
             this.LicenseTextArea.Append(Environment.NewLine + "Licensed under the Apache License, Version 2.0 (the \"License\"); " +
                                         "you may not use this file except in compliance with the License. You may obtain a copy of the License at " +
                                         Environment.NewLine + Environment.NewLine + "https://www.apache.org/licenses/LICENSE-2.0" + Environment.NewLine + Environment.NewLine +
