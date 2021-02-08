@@ -42,9 +42,11 @@ mkdir %APPDIR% || goto :error
 mkdir %LICDIR% || goto :error
 
 @rem Copy binaries to the output directory
-copy ..\src\TimeStampClientGui\bin\Release\*.* %APPDIR% || goto :error
-del %APPDIR%\*.pdb
-del %APPDIR%\*.xml
+copy ..\src\TimeStampClientGui\bin\Release\*.exe %APPDIR% || goto :error
+copy ..\src\TimeStampClientGui\bin\Release\*.exe.config %APPDIR% || goto :error
+copy ..\src\TimeStampClientGui\bin\Release\*.dll %APPDIR% || goto :error
+copy ..\src\TimeStampClientCmd\bin\Release\*.exe %APPDIR% || goto :error
+copy ..\src\TimeStampClientCmd\bin\Release\*.exe.config %APPDIR% || goto :error
 
 @rem Copy licenses to the output directory
 copy license\*.txt %LICDIR% || goto :error
