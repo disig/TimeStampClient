@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Disig.TimeStampClient.Gui</RootNamespace>
   </PropertyGroup>
-	
+
   <ItemGroup>
     <Compile Include="..\TimeStampClientGui.Windows\AboutDialog.cs" Link="AboutDialog.cs" />
     <Compile Include="..\TimeStampClientGui.Windows\ClientSettings.cs" Link="ClientSettings.cs" />
@@ -16,7 +16,7 @@
     <Compile Include="..\TimeStampClientGui.Windows\SharedUtils.cs" Link="SharedUtils.cs" />
     <Compile Include="..\TimeStampClientGui.Windows\XmlSerializer.cs" Link="XmlSerializer.cs" />
   </ItemGroup>
-	
+
   <ItemGroup>
     <EmbeddedResource Include="..\TimeStampClientGui.Windows\TimeStampClient.ico" Link="TimeStampClient.ico" />
   </ItemGroup>
@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="DotNetZip" Version="1.15.0" />
+    <PackageReference Include="DotNetZip" Version="1.15.0" />
     <PackageReference Include="Eto.Platform.Gtk" Version="2.5.10" />
   </ItemGroup>
-	
+
 </Project>
