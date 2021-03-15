@@ -162,11 +162,7 @@ namespace Disig.TimeStampClient
                 TimeStampToken token = SharedUtils.RequestTST(fileToTimestamp, tsaAddress, hashAlg, requestedPolicy, nonce, certReq, credentials);
                 logger(string.Format("Time stamp successfully received:"));
                 logger(string.Format("    Serial number: {0}", SharedUtils.BytesToHexString(token.SerialNumber)));
-
-                if (null != token.Time)
-                {
-                    logger(string.Format("    Time: {0:dd MMM yyyy HH':'mm':'ss 'GMT'}", (token.Time).ToUniversalTime()));
-                }
+                logger(string.Format("    Time: {0:dd MMM yyyy HH':'mm':'ss 'GMT'}", (token.Time).ToUniversalTime()));
 
                 logger(string.Format("TSA certificate:"));
                 logger(string.Format("    Issuer: {0}", token.TsaInformation.TsaCertIssuerName.Name));
