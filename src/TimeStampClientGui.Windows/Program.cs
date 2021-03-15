@@ -20,7 +20,6 @@
 */
 
 using System;
-using Eto;
 using Eto.Forms;
 
 namespace Disig.TimeStampClient.Gui
@@ -31,7 +30,7 @@ namespace Disig.TimeStampClient.Gui
         public static void Main()
         {
             // TODO: unhandled exceptions: Eto.Forms.Application.UnhandledException
-            new Application(Platform.Detect).Run(new MainForm());
+            new Application(Eto.Platforms.Wpf).Run(new MainForm());
         }
 
         private Program()
