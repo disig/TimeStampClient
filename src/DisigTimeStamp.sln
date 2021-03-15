@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeStampClient", "TimeStam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeStampClientCmd", "TimeStampClientCmd\TimeStampClientCmd.csproj", "{48621175-3DB7-49C2-8857-99379B0C5B27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeStampClientGui", "TimeStampClientGui\TimeStampClientGui.csproj", "{9C02275A-4665-428B-9BFA-DF1D70C320F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeStampClientGui.Windows", "TimeStampClientGui.Windows\TimeStampClientGui.Windows.csproj", "{9C02275A-4665-428B-9BFA-DF1D70C320F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
