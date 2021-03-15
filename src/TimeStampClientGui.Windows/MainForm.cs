@@ -259,7 +259,7 @@ namespace Disig.TimeStampClient.Gui
                 }
             };
 
-            Assembly assembly = Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.GetAssembly(typeof(MainForm));
             using (Stream stream = assembly.GetManifestResourceStream("Disig.TimeStampClient.Gui.TimeStampClient.ico"))
             {
                 this.Icon = new Icon(stream);

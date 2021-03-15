@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Disig.TimeStampClient.Gui</RootNamespace>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <Compile Include="..\TimeStampClientGui.Windows\AboutDialog.cs" Link="AboutDialog.cs" />
+    <Compile Include="..\TimeStampClientGui.Windows\ClientSettings.cs" Link="ClientSettings.cs" />
+    <Compile Include="..\TimeStampClientGui.Windows\ComboItemCertReq.cs" Link="ComboItemCertReq.cs" />
+    <Compile Include="..\TimeStampClientGui.Windows\ComboItemFormat.cs" Link="ComboItemFormat.cs" />
+    <Compile Include="..\TimeStampClientGui.Windows\ComboItemHash.cs" Link="ComboItemHash.cs" />
+    <Compile Include="..\TimeStampClientGui.Windows\MainForm.cs" Link="MainForm.cs" />
+    <Compile Include="..\TimeStampClientGui.Windows\SharedUtils.cs" Link="SharedUtils.cs" />
+    <Compile Include="..\TimeStampClientGui.Windows\XmlSerializer.cs" Link="XmlSerializer.cs" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <EmbeddedResource Include="..\TimeStampClientGui.Windows\TimeStampClient.ico" Link="TimeStampClient.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TimeStampClient\TimeStampClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="DotNetZip" Version="1.15.0" />
+    <PackageReference Include="Eto.Platform.Gtk" Version="2.5.10" />
+  </ItemGroup>
+	
+</Project>
