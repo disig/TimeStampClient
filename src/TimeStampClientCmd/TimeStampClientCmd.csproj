@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\TimeStampClientGui\SharedUtils.cs">
+    <Compile Include="..\TimeStampClientGui.Windows\SharedUtils.cs">
       <Link>SharedUtils.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
