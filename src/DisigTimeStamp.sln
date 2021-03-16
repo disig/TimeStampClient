@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeStampClientGui.Windows"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeStampClientGui.Linux", "TimeStampClientGui.Linux\TimeStampClientGui.Linux.csproj", "{7326BCB6-263E-430F-B0D5-71B442E87A54}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeStampClientGui.MacOs", "TimeStampClientGui.MacOs\TimeStampClientGui.MacOs.csproj", "{EE454584-D145-4390-8B16-1D079AA70695}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7326BCB6-263E-430F-B0D5-71B442E87A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7326BCB6-263E-430F-B0D5-71B442E87A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7326BCB6-263E-430F-B0D5-71B442E87A54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE454584-D145-4390-8B16-1D079AA70695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE454584-D145-4390-8B16-1D079AA70695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE454584-D145-4390-8B16-1D079AA70695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE454584-D145-4390-8B16-1D079AA70695}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
