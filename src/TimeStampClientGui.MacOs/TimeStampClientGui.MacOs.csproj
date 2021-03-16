@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="TimeStampClientGui.icns" />
+    <Content Include="TimeStampClientGui.icns" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="..\TimeStampClientGui.Windows\TimeStampClient.ico" Link="TimeStampClient.ico" />
   </ItemGroup>
 
