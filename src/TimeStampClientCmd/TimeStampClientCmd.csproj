@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\TimeStampClientGui.Windows\SharedUtils.cs" Link="SharedUtils.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DotNetZip" Version="1.15.0" />
   </ItemGroup>
 

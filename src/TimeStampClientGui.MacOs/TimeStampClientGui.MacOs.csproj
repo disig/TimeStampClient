@@ -14,7 +14,7 @@
     <Compile Include="..\TimeStampClientGui.Windows\ComboItemFormat.cs" Link="ComboItemFormat.cs" />
     <Compile Include="..\TimeStampClientGui.Windows\ComboItemHash.cs" Link="ComboItemHash.cs" />
     <Compile Include="..\TimeStampClientGui.Windows\MainForm.cs" Link="MainForm.cs" />
-    <Compile Include="..\TimeStampClientGui.Windows\SharedUtils.cs" Link="SharedUtils.cs" />
+    <Compile Include="..\TimeStampClientCmd\SharedUtils.cs" Link="SharedUtils.cs" />
     <Compile Include="..\TimeStampClientGui.Windows\XmlSerializer.cs" Link="XmlSerializer.cs" />
   </ItemGroup>
 

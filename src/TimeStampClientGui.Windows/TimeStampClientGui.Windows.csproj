@@ -50,10 +50,12 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TimeStampClientCmd\SharedUtils.cs">
+      <Link>SharedUtils.cs</Link>
+    </Compile>
     <Compile Include="AboutDialog.cs" />
     <Compile Include="ComboItemFormat.cs" />
     <Compile Include="ClientSettings.cs" />
-    <Compile Include="SharedUtils.cs" />
     <Compile Include="XmlSerializer.cs" />
     <Compile Include="ComboItemCertReq.cs" />
     <Compile Include="ComboItemHash.cs" />
