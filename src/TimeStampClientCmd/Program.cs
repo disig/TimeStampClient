@@ -160,10 +160,9 @@ namespace Disig.TimeStampClient.Cmd
                 Console.WriteLine();
             }
 
-            Console.WriteLine(@"Example usage:");
+            Console.WriteLine(@"Usage:");
             Console.WriteLine();
-            Console.WriteLine(@"  Request time stamp:");
-            Console.WriteLine(Assembly.GetExecutingAssembly().GetName().Name + SharedUtils.AppVersion);
+            Console.WriteLine(@"    TimeStampClientCmd");
             Console.WriteLine(@"      --file ""file_to_timestamp""");
             Console.WriteLine(@"      --tsa ""tsa_service_address""");
             Console.WriteLine(@"      --out ""file_to_save_timestamp""");
