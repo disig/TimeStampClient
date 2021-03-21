@@ -20,6 +20,7 @@
 */
 
 using System;
+using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -234,6 +235,28 @@ namespace Disig.TimeStampClient
                     zipFile.Save(outputStream);
                 }
             }
+        }
+
+        public static bool RunningOnWindows()
+        {
+            string windir = Environment.GetEnvironmentVariable("windir");
+            return !string.IsNullOrEmpty(windir) && windir.Contains(@"\") && Directory.Exists(windir);
+        }
+
+        public static bool RunningOnLinux()
+        {
+            if (File.Exists(@"/proc/sys/kernel/ostype"))
+            {
+                string osType = File.ReadAllText(@"/proc/sys/kernel/ostype");
+                return osType.StartsWith("Linux", StringComparison.OrdinalIgnoreCase);
+            }
+
+            return false;
+        }
+
+        public static bool RunningOnMacOs()
+        {
+            return File.Exists(@"/System/Library/CoreServices/SystemVersion.plist");
         }
     }
 }

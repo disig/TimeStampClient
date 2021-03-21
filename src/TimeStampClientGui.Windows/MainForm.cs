@@ -947,6 +947,9 @@ namespace Disig.TimeStampClient.Gui
         private void TerminateApplication()
         {
             this.Close();
+
+            if (SharedUtils.RunningOnMacOs())
+                Environment.Exit(0);
         }
 
         private void ExitCommandOnClick(object sender, EventArgs e)
