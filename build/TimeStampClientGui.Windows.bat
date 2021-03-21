@@ -34,11 +34,11 @@ del %APPDIR%\*.xml
 @rem Copy licenses to the output directory
 set LICDIR=%APPDIR%\license
 mkdir %LICDIR% || goto :error
-copy license\BouncyCastle.Crypto.txt %LICDIR% || goto :error
 copy license\DotNetZip.LICENSE.txt %LICDIR% || goto :error
 copy license\DotNetZip.NOTICE.txt %LICDIR% || goto :error
 copy license\Eto.Forms.txt %LICDIR% || goto :error
 copy license\Eto.Platform.Wpf.txt %LICDIR% || goto :error
+copy license\Portable.BouncyCastle.txt %LICDIR% || goto :error
 copy license\TimeStampClient.LICENSE.txt %LICDIR% || goto :error
 copy license\TimeStampClient.NOTICE.txt %LICDIR% || goto :error
 
