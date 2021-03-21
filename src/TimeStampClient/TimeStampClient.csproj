@@ -2,7 +2,7 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
@@ -18,7 +18,7 @@
     <Version>1.1.0</Version>
     <PackageId>TimeStampClient</PackageId>
     <Copyright>Copyright 2016-2021 Disig a.s.</Copyright>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageLicenseFile>TimeStampClient.LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/disig/TimeStampClient</PackageProjectUrl>
     <PackageIcon>TimeStampClient.png</PackageIcon>
     <RepositoryUrl>https://github.com/disig/TimeStampClient.git</RepositoryUrl>
@@ -35,8 +35,8 @@
   </PropertyGroup>
   
   <ItemGroup Label="PackExtraContent">
-   <None Include="../../build/license/LICENSE.txt" pack="true" PackagePath="." />
-   <None Include="../../build/license/NOTICE.txt" pack="true" PackagePath="." />
+   <None Include="../../build/license/TimeStampClient.LICENSE.txt" pack="true" PackagePath="." />
+   <None Include="../../build/license/TimeStampClient.NOTICE.txt" pack="true" PackagePath="." />
    <None Include="../../doc/icons/TimeStampClient.png" pack="true" PackagePath="." />
   </ItemGroup>
  
