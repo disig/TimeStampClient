@@ -164,10 +164,15 @@ namespace Disig.TimeStampClient.Gui
             this.ComponentsTextArea.ReadOnly = true;
             this.ComponentsTextArea.Text = string.Empty;
             this.ComponentsTextArea.Append(@"TimeStampClient uses following 3rd party components (in alphabetical order):" + Environment.NewLine
-                + Environment.NewLine + "- DotNetZip.Reduced" + Environment.NewLine + "- Eto.Forms" + Environment.NewLine + "- Eto.Platform.Gtk2" + Environment.NewLine
-                + "- Eto.Platform.Gtk3" + Environment.NewLine + "- Eto.Platform.Mac64" + Environment.NewLine
-                + "- Eto.Platform.Windows" + Environment.NewLine + "- Eto.Platform.Wpf" + Environment.NewLine + "- Portable.BouncyCastle"
-                + Environment.NewLine + Environment.NewLine + "Full license text for each of these components can be found in the installation directory.");
+                    + Environment.NewLine
+                    + "- DotNetZip" + Environment.NewLine
+                    + "- Eto.Forms" + Environment.NewLine
+                    + "- Eto.Platform.Gtk" + Environment.NewLine
+                    + "- Eto.Platform.Mac64" + Environment.NewLine
+                    + "- Eto.Platform.Wpf" + Environment.NewLine
+                    + "- BouncyCastle.Crypto" + Environment.NewLine
+                    + Environment.NewLine
+                    + "Full license text for each of these components can be found in the installation directory.");
         }
 
         private void FillLicenseTextArea()
