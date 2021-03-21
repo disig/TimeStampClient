@@ -20,6 +20,7 @@
 */
 
 using System;
+using System.Diagnostics;
 using Eto.Drawing;
 using Eto.Forms;
 
@@ -64,6 +65,7 @@ namespace Disig.TimeStampClient.Gui
 
             this.Content = this.CreateAboutContent();
             this.MinimumSize = new Size(400, 300);
+            this.Size = this.MinimumSize;
         }
 
         private Layout CreateAboutContent()
@@ -200,7 +202,10 @@ namespace Disig.TimeStampClient.Gui
 
         private static void OpenWebSite()
         {
-            System.Diagnostics.Process.Start("https://github.com/disig/TimeStampClient");
+            Process.Start(new ProcessStartInfo {
+                FileName = "https://github.com/disig/TimeStampClient",
+                UseShellExecute = true
+            });
         }
 
         private void WebsiteButtonOnClick(object sender, EventArgs e)
