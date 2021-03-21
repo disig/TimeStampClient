@@ -1,5 +1,23 @@
 setlocal
 
+@rem Initialize build environment of Visual Studio 2017 or 2019 Community/Professional/Enterprise
+@set tools=
+@set tmptools="c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsMSBuildCmd.bat"
+@if exist %tmptools% set tools=%tmptools%
+@set tmptools="c:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools\VsMSBuildCmd.bat"
+@if exist %tmptools% set tools=%tmptools%
+@set tmptools="c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
+@if exist %tmptools% set tools=%tmptools%
+@set tmptools="c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat"
+@if exist %tmptools% set tools=%tmptools%
+@set tmptools="c:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsMSBuildCmd.bat"
+@if exist %tmptools% set tools=%tmptools%
+@set tmptools="c:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
+@if exist %tmptools% set tools=%tmptools%
+@if not defined tools goto :error
+call %tools%
+@echo on
+
 @rem Remove leftovers of any previous builds
 rmdir /S /Q ..\src\TimeStampClient\bin
 rmdir /S /Q ..\src\TimeStampClient\obj
@@ -13,7 +31,9 @@ rmdir /S /Q ..\src\TimeStampClientGui.Windows\bin
 rmdir /S /Q ..\src\TimeStampClientGui.Windows\obj
 
 @rem Build release
-dotnet publish -c Release ..\src\TimeStampClientGui.MacOs\TimeStampClientGui.MacOs.csproj
+msbuild ..\src\TimeStampClientGui.MacOs\TimeStampClientGui.MacOs.csproj /p:Configuration=Release /target:Restore || goto :error
+msbuild ..\src\TimeStampClientGui.MacOs\TimeStampClientGui.MacOs.csproj /p:Configuration=Release /target:Clean || goto :error
+msbuild ..\src\TimeStampClientGui.MacOs\TimeStampClientGui.MacOs.csproj /p:Configuration=Release /target:Build || goto :error
 
 @rem Copy binaries to the output directory
 set APPDIR=TimeStampClientGui.MacOs.app
