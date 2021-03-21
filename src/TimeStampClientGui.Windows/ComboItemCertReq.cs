@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2019 Disig a.s.
+*  Copyright 2016-2021 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -23,13 +23,28 @@ using Eto.Forms;
 
 namespace Disig.TimeStampClient.Gui
 {
-    internal class ComboItemHash : IListItem
+    internal class ComboItemCertReq : IListItem
     {
-        public ComboItemHash(string text, Oid value)
+        public ComboItemCertReq(bool value)
         {
-            this.Text = text;
             this.Value = value;
-            this.Key = this.Text;
+
+            if (value)
+            {
+                this.Key = true.ToString();
+                this.Text = "Yes";
+            }
+            else
+            {
+                this.Key = false.ToString();
+                this.Text = "No";
+            }
+        }
+
+        public bool Value
+        {
+            get;
+            set;
         }
 
         public string Key
@@ -44,12 +59,6 @@ namespace Disig.TimeStampClient.Gui
             set;
         }
 
-        public Oid Value
-        {
-            get;
-            set;
-        }
-        
         public override string ToString()
         {
             return this.Text;

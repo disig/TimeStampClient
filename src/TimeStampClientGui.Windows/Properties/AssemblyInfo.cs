@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Disig a.s.")]
 [assembly: AssemblyProduct("TimeStampClient")]
-[assembly: AssemblyCopyright("Copyright 2016-2019 Disig a.s.")]
+[assembly: AssemblyCopyright("Copyright 2016-2021 Disig a.s.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -17,8 +17,8 @@ using System.Runtime.InteropServices;
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
 // and "{Major}.{Minor}.{Build}.*" will update just the revision.
 
-[assembly: AssemblyVersion("1.1.0")]
-[assembly: AssemblyFileVersion("1.1.0")]
+[assembly: AssemblyVersion("1.2.0")]
+[assembly: AssemblyFileVersion("1.2.0")]
 [assembly: ComVisible(false)]
 
 // The following attributes are used to specify the signing key for the assembly,

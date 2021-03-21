@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2019 Disig a.s.
+*  Copyright 2016-2021 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -81,6 +81,9 @@ namespace Disig.TimeStampClient.Cmd
                         case "--cert-req":
                             cert = true;
                             break;
+                        case "--asics":
+                            isAsics = true;
+                            break;
                         case "--ssl-client-cert-file":
                             sslClientCertFile = args[++i];
                             break;
@@ -92,9 +95,6 @@ namespace Disig.TimeStampClient.Cmd
                             break;
                         case "--http-auth-pass":
                             httpAuthPass = args[++i];
-                            break;
-                        case "--asics":
-                            isAsics = true;
                             break;
                         default:
                             ExitWithHelp("Invalid argument: " + args[i]);
@@ -151,7 +151,7 @@ namespace Disig.TimeStampClient.Cmd
             if (string.IsNullOrEmpty(error))
             {
                 Console.WriteLine(Assembly.GetExecutingAssembly().GetName().Name + " " + Assembly.GetExecutingAssembly().GetName().Version);
-                Console.WriteLine(@"Copyright (c) 2016-2019 Disig a.s. <http://www.disig.sk>");
+                Console.WriteLine(@"Copyright (c) 2016-2021 Disig a.s. <http://www.disig.sk>");
                 Console.WriteLine();
             }
             else
@@ -160,17 +160,17 @@ namespace Disig.TimeStampClient.Cmd
                 Console.WriteLine();
             }
 
-            Console.WriteLine(@"Example usage:");
+            Console.WriteLine(@"Usage:");
             Console.WriteLine();
-            Console.WriteLine(@"  Request time stamp:");
-            Console.WriteLine(Assembly.GetExecutingAssembly().GetName().Name + SharedUtils.AppVersion);
+            Console.WriteLine(@"    TimeStampClientCmd");
             Console.WriteLine(@"      --file ""file_to_timestamp""");
             Console.WriteLine(@"      --tsa ""tsa_service_address""");
             Console.WriteLine(@"      --out ""file_to_save_timestamp""");
             Console.WriteLine(@"      [--hash ""sha1 | sha256 | sha512 | md5""]");
             Console.WriteLine(@"      [--policy ""policy_oid""]");
-            Console.WriteLine(@"      [--cert-req]");
             Console.WriteLine(@"      [--nonce ""1234567890ABCDEF""]");
+            Console.WriteLine(@"      [--cert-req]");
+            Console.WriteLine(@"      [--asics]");
             Console.WriteLine(@"      [--ssl-client-cert-file ""path_to_client_pkcs12_certificate""]");
             Console.WriteLine(@"      [--ssl-client-cert-pass ""certificate_password""]");
             Console.WriteLine(@"      [--http-auth-login ""http_authentication_login""]");

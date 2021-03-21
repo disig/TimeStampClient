@@ -7,6 +7,9 @@ src/.vs/*
 *.suo
 *.user
 **/packages/*
-/build/application
-/build/nuget
-/build/nuget-signed
+/build/nuget-unsigned/
+/build/nuget-signed/
+/build/TimeStampClientCmd/
+/build/TimeStampClientGui.Linux/
+/build/TimeStampClientGui.MacOs.app/
+/build/TimeStampClientGui.Windows/

@@ -2,22 +2,25 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
   
   <PropertyGroup Label="Package">
     <Company>Disig a.s.</Company>
     <Product>TimeStampClient</Product>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <PackageId>TimeStampClient</PackageId>
-    <Copyright>Copyright 2016-2019 Disig a.s.</Copyright>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/disig/TimeStampClient/1.1.0/LICENSE.txt</PackageLicenseUrl>
+    <Copyright>Copyright 2016-2021 Disig a.s.</Copyright>
+    <PackageLicenseFile>TimeStampClient.LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/disig/TimeStampClient</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/disig/TimeStampClient/master/doc/icons/TimeStampClient.png</PackageIconUrl>
+    <PackageIcon>TimeStampClient.png</PackageIcon>
     <RepositoryUrl>https://github.com/disig/TimeStampClient.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>trusted timestamp time-stamp trust time stamp security crypto cryptography</PackageTags>
@@ -32,13 +35,14 @@
   </PropertyGroup>
   
   <ItemGroup Label="PackExtraContent">
-   <None Include="../../build/license/LICENSE.txt" pack="true" PackagePath="." />
-   <None Include="../../build/license/NOTICE.txt" pack="true" PackagePath="." />
+   <None Include="../../build/license/TimeStampClient.LICENSE.txt" pack="true" PackagePath="." />
+   <None Include="../../build/license/TimeStampClient.NOTICE.txt" pack="true" PackagePath="." />
+   <None Include="../../doc/icons/TimeStampClient.png" pack="true" PackagePath="." />
   </ItemGroup>
  
   <ItemGroup Label="Package References">
-    <PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

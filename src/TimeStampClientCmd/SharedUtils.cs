@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2019 Disig a.s.
+*  Copyright 2016-2021 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@
 */
 
 using System;
+using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -162,11 +163,7 @@ namespace Disig.TimeStampClient
                 TimeStampToken token = SharedUtils.RequestTST(fileToTimestamp, tsaAddress, hashAlg, requestedPolicy, nonce, certReq, credentials);
                 logger(string.Format("Time stamp successfully received:"));
                 logger(string.Format("    Serial number: {0}", SharedUtils.BytesToHexString(token.SerialNumber)));
-
-                if (null != token.Time)
-                {
-                    logger(string.Format("    Time: {0:dd MMM yyyy HH':'mm':'ss 'GMT'}", (token.Time).ToUniversalTime()));
-                }
+                logger(string.Format("    Time: {0:dd MMM yyyy HH':'mm':'ss 'GMT'}", (token.Time).ToUniversalTime()));
 
                 logger(string.Format("TSA certificate:"));
                 logger(string.Format("    Issuer: {0}", token.TsaInformation.TsaCertIssuerName.Name));
@@ -238,6 +235,28 @@ namespace Disig.TimeStampClient
                     zipFile.Save(outputStream);
                 }
             }
+        }
+
+        public static bool RunningOnWindows()
+        {
+            string windir = Environment.GetEnvironmentVariable("windir");
+            return !string.IsNullOrEmpty(windir) && windir.Contains(@"\") && Directory.Exists(windir);
+        }
+
+        public static bool RunningOnLinux()
+        {
+            if (File.Exists(@"/proc/sys/kernel/ostype"))
+            {
+                string osType = File.ReadAllText(@"/proc/sys/kernel/ostype");
+                return osType.StartsWith("Linux", StringComparison.OrdinalIgnoreCase);
+            }
+
+            return false;
+        }
+
+        public static bool RunningOnMacOs()
+        {
+            return File.Exists(@"/System/Library/CoreServices/SystemVersion.plist");
         }
     }
 }

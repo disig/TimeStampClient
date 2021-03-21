@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2019 Disig a.s.
+*  Copyright 2016-2021 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -259,7 +259,7 @@ namespace Disig.TimeStampClient.Gui
                 }
             };
 
-            Assembly assembly = Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.GetAssembly(typeof(MainForm));
             using (Stream stream = assembly.GetManifestResourceStream("Disig.TimeStampClient.Gui.TimeStampClient.ico"))
             {
                 this.Icon = new Icon(stream);
@@ -713,11 +713,11 @@ namespace Disig.TimeStampClient.Gui
             string fileName;
             if (((ComboItemFormat)this.ResponseFormat.SelectedValue).Format == SharedUtils.ResultFormat.ASIC_S)
             {
-                fileName = this.SaveFileDialog("Select file to save time-stamp token", new FileDialogFilter[] { new FileDialogFilter("ASiC-S (*.asics)", "*.asics") }, false);
+                fileName = this.SaveFileDialog("Select file to save time-stamp token", new FileFilter[] { new FileFilter("ASiC-S (*.asics)", "*.asics") }, false);
             }
             else
             {
-                fileName = this.SaveFileDialog("Select file to save time-stamp token", new FileDialogFilter[] { new FileDialogFilter("Raw time-stamp tokens (*.tst)", "*.tst") }, false);
+                fileName = this.SaveFileDialog("Select file to save time-stamp token", new FileFilter[] { new FileFilter("Raw time-stamp tokens (*.tst)", "*.tst") }, false);
             }
 
             if (null != fileName)
@@ -726,7 +726,7 @@ namespace Disig.TimeStampClient.Gui
             }
         }
 
-        private string OpenFileDialog(string title, FileDialogFilter[] filters = null, bool mustExist = true)
+        private string OpenFileDialog(string title, FileFilter[] filters = null, bool mustExist = true)
         {
             using (FileDialog dialog = new OpenFileDialog())
             {
@@ -734,23 +734,23 @@ namespace Disig.TimeStampClient.Gui
                 dialog.Title = title;
                 if (filters != null)
                 {
-                    foreach (FileDialogFilter filter in filters)
+                    foreach (FileFilter filter in filters)
                     {
                         dialog.Filters.Add(filter);
                     }
                 }
 
-                dialog.Filters.Add(new FileDialogFilter("All files (*.*)", "*.*"));
+                dialog.Filters.Add(new FileFilter("All files (*.*)", "*.*"));
                 if (DialogResult.Ok == dialog.ShowDialog(this))
                 {
                     return dialog.FileName;
                 }
 
                 return null;
+            }
         }
-    }
 
-        private string SaveFileDialog(string title, FileDialogFilter[] filters = null, bool mustExist = false)
+        private string SaveFileDialog(string title, FileFilter[] filters = null, bool mustExist = false)
         {
             using (FileDialog dialog = new SaveFileDialog())
             {
@@ -758,13 +758,13 @@ namespace Disig.TimeStampClient.Gui
                 dialog.Title = title;
                 if (filters != null)
                 {
-                    foreach (FileDialogFilter filter in filters)
+                    foreach (FileFilter filter in filters)
                     {
                         dialog.Filters.Add(filter);
                     }
                 }
 
-                dialog.Filters.Add(new FileDialogFilter("All files (*.*)", "*.*"));
+                dialog.Filters.Add(new FileFilter("All files (*.*)", "*.*"));
                 if (DialogResult.Ok == dialog.ShowDialog(this))
                 {
                     return dialog.FileName;
@@ -864,7 +864,7 @@ namespace Disig.TimeStampClient.Gui
         {
             try
             {
-                string fileName = this.OpenFileDialog("Select configuration", new FileDialogFilter[] { new FileDialogFilter("Configuration files (*.cfg)", "*.cfg") }, true);
+                string fileName = this.OpenFileDialog("Select configuration", new FileFilter[] { new FileFilter("Configuration files (*.cfg)", "*.cfg") }, true);
                 if (null == fileName)
                 {
                     return;
@@ -929,7 +929,7 @@ namespace Disig.TimeStampClient.Gui
         {
             try
             {
-                string fileName = this.SaveFileDialog("Select file to save configuration", new FileDialogFilter[] { new FileDialogFilter("Configuration files (*.cfg)", "*.cfg") }, false);
+                string fileName = this.SaveFileDialog("Select file to save configuration", new FileFilter[] { new FileFilter("Configuration files (*.cfg)", "*.cfg") }, false);
                 if (string.IsNullOrEmpty(fileName))
                 {
                     return;
@@ -947,6 +947,9 @@ namespace Disig.TimeStampClient.Gui
         private void TerminateApplication()
         {
             this.Close();
+
+            if (SharedUtils.RunningOnMacOs())
+                Environment.Exit(0);
         }
 
         private void ExitCommandOnClick(object sender, EventArgs e)

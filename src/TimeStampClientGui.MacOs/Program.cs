@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2019 Disig a.s.
+*  Copyright 2016-2021 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -16,27 +16,20 @@
 
 /*
 *  Written by:
-*  Marek KLEIN <kleinmrk@gmail.com>
+*  Jaroslav IMRICH <jimrich@jimrich.sk>
 */
 
 using System;
-using Eto;
 using Eto.Forms;
 
 namespace Disig.TimeStampClient.Gui
 {
-    public sealed class Program
+    class MainClass
     {
         [STAThread]
-        public static void Main()
+        public static void Main(string[] args)
         {
-            // TODO: unhandled exceptions: Eto.Forms.Application.UnhandledException
-            new Application(Platform.Detect).Run(new MainForm());
-        }
-
-        private Program()
-        {
-
+            new Application(Eto.Platforms.Mac64).Run(new MainForm());
         }
     }
 }

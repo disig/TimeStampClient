@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2019 Disig a.s.
+*  Copyright 2016-2021 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -19,40 +19,23 @@
 *  Marek KLEIN <kleinmrk@gmail.com>
 */
 
+using System;
 using Eto.Forms;
 
 namespace Disig.TimeStampClient.Gui
 {
-    internal class ComboItemFormat : IListItem
-    {        
-        public ComboItemFormat(string text, SharedUtils.ResultFormat format)
+    public sealed class Program
+    {
+        [STAThread]
+        public static void Main()
         {
-            this.Text = text;
-            this.Key = format.ToString();
-            this.Format = format;
+            // TODO: unhandled exceptions: Eto.Forms.Application.UnhandledException
+            new Application(Eto.Platforms.Wpf).Run(new MainForm());
         }
 
-        public SharedUtils.ResultFormat Format
+        private Program()
         {
-            get;
-            set;
-        }
 
-        public string Key
-        {
-            get;
-            private set;
-        }
-
-        public string Text
-        {
-            get;
-            set;
-        }
-
-        public override string ToString()
-        {
-            return this.Text;
         }
     }
 }
