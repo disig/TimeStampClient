@@ -15,7 +15,7 @@
   <PropertyGroup Label="Package">
     <Company>Disig a.s.</Company>
     <Product>TimeStampClient</Product>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <PackageId>TimeStampClient</PackageId>
     <Copyright>Copyright 2016-2021 Disig a.s.</Copyright>
     <PackageLicenseFile>TimeStampClient.LICENSE.txt</PackageLicenseFile>

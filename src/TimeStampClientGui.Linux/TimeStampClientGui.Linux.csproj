@@ -5,7 +5,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Disig.TimeStampClient.Gui</RootNamespace>
     <Product>TimeStampClient</Product>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Company>Disig a.s.</Company>
     <Copyright>Copyright 2016-2021 Disig a.s.</Copyright>
   </PropertyGroup>
