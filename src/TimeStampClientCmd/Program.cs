@@ -81,6 +81,9 @@ namespace Disig.TimeStampClient.Cmd
                         case "--cert-req":
                             cert = true;
                             break;
+                        case "--asics":
+                            isAsics = true;
+                            break;
                         case "--ssl-client-cert-file":
                             sslClientCertFile = args[++i];
                             break;
@@ -92,9 +95,6 @@ namespace Disig.TimeStampClient.Cmd
                             break;
                         case "--http-auth-pass":
                             httpAuthPass = args[++i];
-                            break;
-                        case "--asics":
-                            isAsics = true;
                             break;
                         default:
                             ExitWithHelp("Invalid argument: " + args[i]);
@@ -169,8 +169,9 @@ namespace Disig.TimeStampClient.Cmd
             Console.WriteLine(@"      --out ""file_to_save_timestamp""");
             Console.WriteLine(@"      [--hash ""sha1 | sha256 | sha512 | md5""]");
             Console.WriteLine(@"      [--policy ""policy_oid""]");
-            Console.WriteLine(@"      [--cert-req]");
             Console.WriteLine(@"      [--nonce ""1234567890ABCDEF""]");
+            Console.WriteLine(@"      [--cert-req]");
+            Console.WriteLine(@"      [--asics]");
             Console.WriteLine(@"      [--ssl-client-cert-file ""path_to_client_pkcs12_certificate""]");
             Console.WriteLine(@"      [--ssl-client-cert-pass ""certificate_password""]");
             Console.WriteLine(@"      [--http-auth-login ""http_authentication_login""]");
