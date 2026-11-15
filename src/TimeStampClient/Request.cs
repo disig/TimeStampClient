@@ -19,8 +19,9 @@
 *  Marek KLEIN <kleinmrk@gmail.com>
 */
 
-using Org.BouncyCastle.Tsp;
 using System;
+using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Tsp;
 
 namespace Disig.TimeStampClient
 {
@@ -175,7 +176,7 @@ namespace Disig.TimeStampClient
             tsqGenerator.SetCertReq(this.CertReq);
             if (!string.IsNullOrEmpty(this.ReqPolicy))
             {
-                tsqGenerator.SetReqPolicy(this.ReqPolicy);
+                tsqGenerator.SetReqPolicy(new DerObjectIdentifier(this.ReqPolicy));
             }
 
             if (null == this.Nonce)
