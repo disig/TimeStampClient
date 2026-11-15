@@ -8,7 +8,7 @@
     <Product>TimeStampClient</Product>
     <Version>1.2.0</Version>
     <Company>Disig a.s.</Company>
-    <Copyright>Copyright 2016-2021 Disig a.s.</Copyright>
+    <Copyright>Copyright 2016-2026 Disig a.s.</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

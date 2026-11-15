@@ -17,7 +17,7 @@
     <Product>TimeStampClient</Product>
     <Version>1.2.0</Version>
     <PackageId>TimeStampClient</PackageId>
-    <Copyright>Copyright 2016-2021 Disig a.s.</Copyright>
+    <Copyright>Copyright 2016-2026 Disig a.s.</Copyright>
     <PackageLicenseFile>TimeStampClient.LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/disig/TimeStampClient</PackageProjectUrl>
     <PackageIcon>TimeStampClient.png</PackageIcon>
