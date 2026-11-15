@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Disig.TimeStampClient.Gui</RootNamespace>
     <Product>TimeStampClient</Product>
     <Version>1.2.0</Version>

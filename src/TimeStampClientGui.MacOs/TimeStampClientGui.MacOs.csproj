@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Disig.TimeStampClient.Gui</RootNamespace>
     <RuntimeIdentifiers>osx-x64</RuntimeIdentifiers>
     <Product>TimeStampClient</Product>
