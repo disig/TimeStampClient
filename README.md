@@ -32,7 +32,7 @@ var timeStampToken = Disig.TimeStampClient.TimeStampClient.RequestTimeStampToken
 ```
 
 ### TimeStampClient command line application
-[.NET 5.0 runtime](https://dotnet.microsoft.com/download/dotnet/5.0) is required on all platforms in order to use `TimeStampClientCmd` application.
+[.NET Runtime 10.0](https://dotnet.microsoft.com/download/dotnet/10.0) is required on all platforms in order to use `TimeStampClientCmd` application.
 
 Getting time-stamp using the command line application on Windows:
 ```
@@ -47,26 +47,28 @@ $ dotnet ./TimeStampClientCmd.dll --tsa http://localhost/tsa --file document.doc
 ### TimeStampClient GUI application
 
 On Windows:
+- Install [.NET Runtime 10.0](https://dotnet.microsoft.com/download/dotnet/10.0)
 - Extract `TimeStampClientGui.Windows.zip` archive
-- Start the application by double-clicking on `TimeStampClientGui.exe` file
+- Start the application by double-clicking on `TimeStampClientGui.exe` file or with the following command:
+  ```
+  > dotnet ./TimeStampClientGui.dll
+  ```
 
 On Linux:
-- Install [.NET 5.0 runtime](https://dotnet.microsoft.com/download/dotnet/5.0)
+- Install [.NET Runtime 10.0](https://dotnet.microsoft.com/download/dotnet/10.0)
 - Extract `TimeStampClientGui.Linux.zip` archive
 - Start the application with the following command:
   ```
-  $ dotnet ./TimeStampClientGui.Linux.dll
+  $ dotnet ./TimeStampClientGui.dll
   ```
 
 On macOS:
-- Install [.NET 5.0 runtime](https://dotnet.microsoft.com/download/dotnet/5.0)
+- Install [.NET Runtime 10.0](https://dotnet.microsoft.com/download/dotnet/10.0)
 - Extract `TimeStampClientGui.MacOs.zip` archive
-- Execute following commands from command line:
-  ```sh
-  $ chmod +x TimeStampClientGui.MacOs.app/Contents/MacOS/TimeStampClientGui.MacOs
-  $ xattr -c TimeStampClientGui.MacOs.app
+- Start the application with the following command:
   ```
-- Start the application by double-clicking on its icon
+  $ dotnet ./TimeStampClientGui.dll
+  ```
 
 User needs to specify the URL of a time-stamping authority in the "TSA service URL" field and the path to a file to be time-stamped in the "File to time-stamp" field. After clicking on the "Request time-stamp" button the time-stamp token is saved to the file specified in the "Output file" field.
 
