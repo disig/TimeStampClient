@@ -28,6 +28,9 @@ copy license\SharpZipLib.LICENSE.txt %LICDIR% || goto :error
 copy license\TimeStampClient.LICENSE.txt %LICDIR% || goto :error
 copy license\TimeStampClient.NOTICE.txt %LICDIR% || goto :error
 
+@rem Generate THIRD-PARTY-NOTICES.txt with licenses of all NuGet packages used by the application
+dotnet run third-party-notices.cs -- ..\src\TimeStampClientCmd\TimeStampClientCmd.csproj %LICDIR%\THIRD-PARTY-NOTICES.txt || goto :error
+
 @echo *** BUILD SUCCESSFUL ***
 @endlocal
 @exit /b 0
