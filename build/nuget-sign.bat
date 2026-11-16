@@ -11,7 +11,8 @@ set SEVENZIP="c:\Program Files\7-Zip\7z.exe"
 set SIGNTOOL="C:\Program Files (x86)\Microsoft SDKs\ClickOnce\SignTool\signtool.exe"
 
 @rem Define signing options
-set CERTHASH=8d4c215c806f0c9802ef277711a119573216a10a
+set CERTHASHSHA1=5A640AD3AD0DE8608BB38C7686258A2440D3C3C2
+set CERTHASHSHA256=183DF782842BE1370C6559B98D6F3C0C9D18556BA93811C0A31D7090923AFAF7
 set TSAURL=http://time.certum.pl/
 set LIBNAME=TimeStampClient
 set LIBURL=https://github.com/disig/TimeStampClient
@@ -32,13 +33,13 @@ del /Q *.xml || goto :error
 del /Q *.nupkg || goto :error
 
 @rem Sign all assemblies using SHA256withRSA algorithm
-%SIGNTOOL% sign /sha1 %CERTHASH% /fd sha256 /tr %TSAURL% /td sha256 /d %LIBNAME% /du %LIBURL% ^
-lib\net45\TimeStampClient.dll ^
+%SIGNTOOL% sign /sha1 %CERTHASHSHA1% /fd sha256 /tr %TSAURL% /td sha256 /d %LIBNAME% /du %LIBURL% ^
+lib\net462\TimeStampClient.dll ^
 lib\netstandard2.0\TimeStampClient.dll || goto :error
 
 @rem Create signed package with signed assemblies
 %NUGET% pack TimeStampClient.nuspec || goto :error
-%NUGET% sign TimeStampClient*.nupkg -CertificateFingerprint %CERTHASH% -Timestamper %TSAURL% || goto :error
+%NUGET% sign TimeStampClient*.nupkg -CertificateFingerprint %CERTHASHSHA256% -Timestamper %TSAURL% || goto :error
 %NUGET% verify -Signature TimeStampClient*.nupkg || goto :error
 copy %inputdir%\*.snupkg . || goto :error
 

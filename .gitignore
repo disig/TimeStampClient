@@ -11,5 +11,5 @@ TestResults/
 /build/nuget-signed/
 /build/TimeStampClientCmd/
 /build/TimeStampClientGui.Linux/
-/build/TimeStampClientGui.MacOs.app/
+/build/TimeStampClientGui.MacOs/
 /build/TimeStampClientGui.Windows/
