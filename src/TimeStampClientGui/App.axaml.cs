@@ -1,4 +1,4 @@
-﻿/*
+/*
 *  Copyright 2016-2026 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,28 +14,27 @@
 *  limitations under the License.
 */
 
-/*
-*  Written by:
-*  Marek KLEIN <kleinmrk@gmail.com>
-*/
-
-using System;
-using Eto.Forms;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Markup.Xaml;
 
 namespace Disig.TimeStampClient.Gui
 {
-    public sealed class Program
+    public partial class App : Application
     {
-        [STAThread]
-        public static void Main()
+        public override void Initialize()
         {
-            // TODO: unhandled exceptions: Eto.Forms.Application.UnhandledException
-            new Application(Eto.Platforms.Wpf).Run(new MainForm());
+            AvaloniaXamlLoader.Load(this);
         }
 
-        private Program()
+        public override void OnFrameworkInitializationCompleted()
         {
+            if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow = new MainWindow();
+            }
 
+            base.OnFrameworkInitializationCompleted();
         }
     }
 }

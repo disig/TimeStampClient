@@ -209,12 +209,7 @@ namespace Disig.TimeStampClient
 
         public static byte[] GenerateNonceBytes()
         {
-            byte[] nonce = new byte[10];
-            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
-            {
-                rng.GetBytes(nonce);
-                return nonce;
-            }
+            return RandomNumberGenerator.GetBytes(10);
         }
 
         public static void SaveToAsicSimple(string inputFile, TimeStampToken timeStampToken, string outputFile)

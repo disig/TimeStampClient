@@ -107,7 +107,7 @@ namespace Disig.TimeStampClient.Cmd
                 X509Certificate2 sslCert = null;
                 if (!string.IsNullOrEmpty(sslClientCertFile))
                 {
-                    sslCert = new X509Certificate2(sslClientCertFile, sslClientCertPass);
+                    sslCert = X509CertificateLoader.LoadPkcs12FromFile(sslClientCertFile, sslClientCertPass);
                 }
 
                 NetworkCredential networkCredential = null;

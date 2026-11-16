@@ -1,0 +1,115 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Disig.TimeStampClient.Gui.MainWindow"
+        Icon="/TimeStampClient.ico"
+        Width="700" Height="560"
+        MinWidth="700" MinHeight="500"
+        WindowStartupLocation="CenterScreen">
+  <DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="_Application">
+        <MenuItem Header="About" Click="AboutCommandOnClick" />
+        <MenuItem Header="Exit" Click="ExitCommandOnClick" />
+      </MenuItem>
+      <MenuItem Header="_Configuration">
+        <MenuItem Header="Load..." Click="MenuConfigurationLoadOnclick" />
+        <MenuItem Header="Save as..." Click="MenuConfigurationSaveOnclick" />
+      </MenuItem>
+      <MenuItem Header="_Log">
+        <MenuItem Header="Clear log" Click="ClearLogOnClick" />
+        <MenuItem x:Name="LogExceptions" Header="Log exceptions" ToggleType="CheckBox" />
+      </MenuItem>
+    </Menu>
+
+    <Grid Margin="10" RowDefinitions="Auto,Auto,Auto,*">
+
+      <TabControl Grid.Row="0">
+
+        <TabItem Header="TSA service">
+          <StackPanel Margin="0,10,0,0" Spacing="8">
+            <StackPanel Spacing="2">
+              <TextBlock Text="TSA service URL" />
+              <TextBox x:Name="ServerAddress" />
+            </StackPanel>
+            <StackPanel Spacing="2">
+              <TextBlock Text="File to time-stamp" />
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBox x:Name="SourceFile" TextChanged="SourceFileOnTextChanged" />
+                <Button Grid.Column="1" Margin="5,0,0,0" Content="Browse" Click="SourceFileButtonOnClick" />
+              </Grid>
+            </StackPanel>
+            <StackPanel Spacing="2">
+              <TextBlock Text="Output format" />
+              <ComboBox x:Name="ResponseFormat" HorizontalAlignment="Stretch" SelectionChanged="ResponseFormatOnValueChanged" />
+            </StackPanel>
+            <StackPanel Spacing="2">
+              <TextBlock Text="Output file" />
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBox x:Name="OutFile" />
+                <Button Grid.Column="1" Margin="5,0,0,0" Content="Browse" Click="OutFileButtonOnClick" />
+              </Grid>
+            </StackPanel>
+          </StackPanel>
+        </TabItem>
+
+        <TabItem Header="Advanced">
+          <StackPanel Margin="0,10,0,0" Spacing="8">
+            <StackPanel Spacing="2">
+              <TextBlock Text="Hash algorithm" />
+              <ComboBox x:Name="HashAlgorithm" HorizontalAlignment="Stretch" />
+            </StackPanel>
+            <StackPanel Spacing="2">
+              <TextBlock Text="Requested policy" />
+              <TextBox x:Name="RequestedPolicy" />
+            </StackPanel>
+            <StackPanel Spacing="2">
+              <TextBlock Text="Nonce (hex)" />
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBox x:Name="Nonce" />
+                <Button Grid.Column="1" Margin="5,0,0,0" Content="Generate" Click="GenerateNonceBytesOnClick" />
+              </Grid>
+            </StackPanel>
+            <StackPanel Spacing="2">
+              <TextBlock Text="Request TSA certificate" />
+              <ComboBox x:Name="TSACertificate" HorizontalAlignment="Stretch" />
+            </StackPanel>
+          </StackPanel>
+        </TabItem>
+
+        <TabItem Header="Authentication">
+          <StackPanel Margin="0,10,0,0" Spacing="8">
+            <StackPanel Spacing="2">
+              <TextBlock Text="HTTP user name" />
+              <TextBox x:Name="UserName" />
+            </StackPanel>
+            <StackPanel Spacing="2">
+              <TextBlock Text="HTTP password" />
+              <TextBox x:Name="UserPassword" PasswordChar="•" />
+            </StackPanel>
+            <StackPanel Spacing="2">
+              <TextBlock Text="PKCS#12 file with SSL client certificate" />
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBox x:Name="UserCert" />
+                <Button Grid.Column="1" Margin="5,0,0,0" Content="Browse" Click="UserCertButtonOnClick" />
+              </Grid>
+            </StackPanel>
+            <StackPanel Spacing="2">
+              <TextBlock Text="PKCS#12 file password" />
+              <TextBox x:Name="UserCertPassword" PasswordChar="•" />
+            </StackPanel>
+          </StackPanel>
+        </TabItem>
+
+      </TabControl>
+
+      <Button Grid.Row="1" x:Name="RequestTimeStampButton" Margin="0,10,0,0"
+              HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+              Content="Request time-stamp" Click="RequestTimeStampButtonOnClick" />
+
+      <TextBlock Grid.Row="2" Margin="0,10,0,2" Text="Activity log" />
+
+      <TextBox Grid.Row="3" x:Name="LogArea" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" />
+
+    </Grid>
+  </DockPanel>
+</Window>

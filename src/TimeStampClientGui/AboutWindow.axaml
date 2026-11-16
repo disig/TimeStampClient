@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Disig.TimeStampClient.Gui.AboutWindow"
+        Title="About"
+        Icon="/TimeStampClient.ico"
+        Width="450" Height="350"
+        MinWidth="400" MinHeight="300"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner">
+  <DockPanel Margin="10">
+    <Grid DockPanel.Dock="Bottom" Margin="0,10,0,0" ColumnDefinitions="Auto,*,Auto">
+      <Button Grid.Column="0" Content="Website" Click="WebsiteButtonOnClick" />
+      <Button Grid.Column="2" Content="Close" IsCancel="True" Click="CloseButtonOnClick" />
+    </Grid>
+    <TabControl>
+      <TabItem Header="License">
+        <TextBox x:Name="LicenseTextArea" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" />
+      </TabItem>
+      <TabItem Header="3rd party components">
+        <TextBox x:Name="ComponentsTextArea" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" />
+      </TabItem>
+    </TabControl>
+  </DockPanel>
+</Window>

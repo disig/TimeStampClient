@@ -1,4 +1,4 @@
-﻿/*
+/*
 *  Copyright 2016-2026 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,45 +14,21 @@
 *  limitations under the License.
 */
 
-/*
-*  Written by:
-*  Marek KLEIN <kleinmrk@gmail.com>
-*/
-
-using Eto.Forms;
-
 namespace Disig.TimeStampClient.Gui
 {
-    internal class ComboItemFormat : IListItem
-    {        
-        public ComboItemFormat(string text, SharedUtils.ResultFormat format)
-        {
-            this.Text = text;
-            this.Key = format.ToString();
-            this.Format = format;
-        }
-
-        public SharedUtils.ResultFormat Format
+    /// <summary>
+    /// Combo box item identified by key
+    /// </summary>
+    internal interface IComboItem
+    {
+        string Key
         {
             get;
-            set;
         }
 
-        public string Key
+        string Text
         {
             get;
-            private set;
-        }
-
-        public string Text
-        {
-            get;
-            set;
-        }
-
-        public override string ToString()
-        {
-            return this.Text;
         }
     }
 }

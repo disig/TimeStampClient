@@ -1,4 +1,4 @@
-﻿/*
+/*
 *  Copyright 2016-2026 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,20 +16,41 @@
 
 /*
 *  Written by:
-*  Jaroslav IMRICH <jimrich@jimrich.sk>
+*  Marek KLEIN <kleinmrk@gmail.com>
 */
-
-using System;
-using Eto.Forms;
 
 namespace Disig.TimeStampClient.Gui
 {
-    class MainClass
+    internal class ComboItemHash : IComboItem
     {
-        [STAThread]
-        public static void Main(string[] args)
+        public ComboItemHash(string text, Oid value)
         {
-            new Application(Eto.Platforms.Gtk).Run(new MainForm());
+            this.Text = text;
+            this.Value = value;
+            this.Key = this.Text;
+        }
+
+        public string Key
+        {
+            get;
+            private set;
+        }
+
+        public string Text
+        {
+            get;
+            set;
+        }
+
+        public Oid Value
+        {
+            get;
+            set;
+        }
+        
+        public override string ToString()
+        {
+            return this.Text;
         }
     }
 }
