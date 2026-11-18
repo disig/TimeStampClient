@@ -1,5 +1,5 @@
-﻿/*
-*  Copyright 2016-2021 Disig a.s.
+/*
+*  Copyright 2016-2026 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -14,22 +14,25 @@
 *  limitations under the License.
 */
 
-/*
-*  Written by:
-*  Jaroslav IMRICH <jimrich@jimrich.sk>
-*/
-
 using System;
-using Eto.Forms;
+using Avalonia;
 
 namespace Disig.TimeStampClient.Gui
 {
-    class MainClass
+    internal static class Program
     {
         [STAThread]
         public static void Main(string[] args)
         {
-            new Application(Eto.Platforms.Gtk).Run(new MainForm());
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        }
+
+        // Also used by visual designer
+        public static AppBuilder BuildAvaloniaApp()
+        {
+            return AppBuilder.Configure<App>()
+                .UsePlatformDetect()
+                .LogToTrace();
         }
     }
 }

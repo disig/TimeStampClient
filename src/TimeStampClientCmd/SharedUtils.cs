@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2021 Disig a.s.
+*  Copyright 2016-2026 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace Disig.TimeStampClient
 {
@@ -208,32 +209,54 @@ namespace Disig.TimeStampClient
 
         public static byte[] GenerateNonceBytes()
         {
-            byte[] nonce = new byte[10];
-            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
-            {
-                rng.GetBytes(nonce);
-                return nonce;
-            }
+            return RandomNumberGenerator.GetBytes(10);
         }
 
         public static void SaveToAsicSimple(string inputFile, TimeStampToken timeStampToken, string outputFile)
         {
-            using (Ionic.Zip.ZipFile zipFile = new Ionic.Zip.ZipFile(UTF8Encoding.UTF8))
-            { 
-                zipFile.ParallelDeflateThreshold = -1;
-                zipFile.UseZip64WhenSaving = Ionic.Zip.Zip64Option.Never;
-                zipFile.EmitTimesInUnixFormatWhenSaving = false;
-                zipFile.EmitTimesInWindowsFormatWhenSaving = false;
-                zipFile.Comment = @"mimetype=application/vnd.etsi.asic-s+zip";
+            using (System.IO.FileStream inputStream = new System.IO.FileStream(inputFile, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+            using (System.IO.FileStream outputStream = new System.IO.FileStream(outputFile, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+            using (ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream, StringCodec.FromEncoding(Encoding.UTF8)))
+            {
+                zipOutputStream.IsStreamOwner = false;
+                zipOutputStream.SetLevel(6);
+                zipOutputStream.UseZip64 = UseZip64.Off;
+                zipOutputStream.SetComment(@"mimetype=application/vnd.etsi.asic-s+zip");
 
-                using (System.IO.FileStream inputStream = new System.IO.FileStream(inputFile, System.IO.FileMode.Open, System.IO.FileAccess.Read))
-                using (System.IO.FileStream outputStream = new System.IO.FileStream(outputFile, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                // mimetype
+                ZipEntry mimeTypeEntry = new ZipEntry("mimetype")
                 {
-                    zipFile.AddEntry(@"mimetype", System.Text.UTF8Encoding.UTF8.GetBytes(@"application/vnd.etsi.asic-s+zip"));
-                    zipFile.AddEntry(System.IO.Path.GetFileName(inputFile), inputStream);
-                    zipFile.AddEntry(@"META-INF/timestamp.tst", timeStampToken.ToByteArray());
-                    zipFile.Save(outputStream);
-                }
+                    IsUnicodeText = true,
+                    CompressionMethod = CompressionMethod.Stored
+                };
+
+                zipOutputStream.PutNextEntry(mimeTypeEntry);
+                using (MemoryStream mimeTypeContent = new MemoryStream(System.Text.UTF8Encoding.UTF8.GetBytes(@"application/vnd.etsi.asic-s+zip")))
+                    mimeTypeContent.CopyTo(zipOutputStream);
+                zipOutputStream.CloseEntry();
+
+                // inputFile
+                ZipEntry inputFileEntry = new ZipEntry(System.IO.Path.GetFileName(inputFile))
+                {
+                    IsUnicodeText = true,
+                    CompressionMethod = CompressionMethod.Deflated
+                };
+
+                zipOutputStream.PutNextEntry(inputFileEntry);
+                inputStream.CopyTo(zipOutputStream);
+                zipOutputStream.CloseEntry();
+
+                // timeStampToken
+                ZipEntry timeStampTokenEntry = new ZipEntry(@"META-INF/timestamp.tst")
+                {
+                    IsUnicodeText = true,
+                    CompressionMethod = CompressionMethod.Deflated
+                };
+
+                zipOutputStream.PutNextEntry(timeStampTokenEntry);
+                using (MemoryStream timeStampTokenContent = new MemoryStream(timeStampToken.ToByteArray()))
+                    timeStampTokenContent.CopyTo(zipOutputStream);
+                zipOutputStream.CloseEntry();
             }
         }
 

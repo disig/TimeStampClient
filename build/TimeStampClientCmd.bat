@@ -1,38 +1,35 @@
-setlocal
+@setlocal
+
+@rem Prepare output directory
+set APPDIR=TimeStampClientCmd
+rmdir /S /Q %APPDIR%
+mkdir %APPDIR% || goto :error
 
 @rem Remove leftovers of any previous builds
 rmdir /S /Q ..\src\TimeStampClient\bin
 rmdir /S /Q ..\src\TimeStampClient\obj
 rmdir /S /Q ..\src\TimeStampClientCmd\bin
 rmdir /S /Q ..\src\TimeStampClientCmd\obj
-rmdir /S /Q ..\src\TimeStampClientGui.Linux\bin
-rmdir /S /Q ..\src\TimeStampClientGui.Linux\obj
-rmdir /S /Q ..\src\TimeStampClientGui.MacOs\bin
-rmdir /S /Q ..\src\TimeStampClientGui.MacOs\obj
-rmdir /S /Q ..\src\TimeStampClientGui.Windows\bin
-rmdir /S /Q ..\src\TimeStampClientGui.Windows\obj
+rmdir /S /Q ..\src\TimeStampClientGui\bin
+rmdir /S /Q ..\src\TimeStampClientGui\obj
 
-@rem Build release
-dotnet publish -c Release ..\src\TimeStampClientCmd\TimeStampClientCmd.csproj
+@rem Build and publish release
+dotnet publish ..\src\TimeStampClientCmd\TimeStampClientCmd.csproj -c Release --self-contained false -o %APPDIR% || goto :error
 
-@rem Copy binaries to the output directory
-set APPDIR=TimeStampClientCmd
-rmdir /S /Q %APPDIR%
-mkdir %APPDIR% || goto :error
-xcopy ..\src\TimeStampClientCmd\bin\Release\net5.0\publish\ %APPDIR% /E  || goto :error
+@rem Remove unnecessary items
 del %APPDIR%\*.pdb
 del %APPDIR%\*.xml
 
 @rem Copy licenses to the output directory
 set LICDIR=%APPDIR%\license
 mkdir %LICDIR% || goto :error
-copy license\DotNetZip.LICENSE.txt %LICDIR% || goto :error
-copy license\DotNetZip.NOTICE.txt %LICDIR% || goto :error
-copy license\Portable.BouncyCastle.txt %LICDIR% || goto :error
+copy license\BouncyCastle.LICENSE.md %LICDIR% || goto :error
+copy license\SharpZipLib.LICENSE.txt %LICDIR% || goto :error
 copy license\TimeStampClient.LICENSE.txt %LICDIR% || goto :error
 copy license\TimeStampClient.NOTICE.txt %LICDIR% || goto :error
 
-endlocal
+@rem Generate THIRD-PARTY-NOTICES.txt with licenses of all NuGet packages used by the application
+dotnet run third-party-notices.cs -- ..\src\TimeStampClientCmd\TimeStampClientCmd.csproj %LICDIR%\THIRD-PARTY-NOTICES.txt || goto :error
 
 @echo *** BUILD SUCCESSFUL ***
 @endlocal

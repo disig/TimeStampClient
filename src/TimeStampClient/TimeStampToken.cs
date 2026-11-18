@@ -1,5 +1,5 @@
 ﻿/*
-*  Copyright 2016-2021 Disig a.s.
+*  Copyright 2016-2026 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -20,11 +20,8 @@
 */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace Disig.TimeStampClient
 {
@@ -61,7 +58,7 @@ namespace Disig.TimeStampClient
             X509Certificate2 tsaCert = null;
             Org.BouncyCastle.Cms.SignerID signerId = this.timeStampToken.SignerID;
             Org.BouncyCastle.Cms.CmsSignedData cmsSignedData = new Org.BouncyCastle.Cms.CmsSignedData(this.timeStampToken.GetEncoded());
-            ICollection signerCerts = cmsSignedData.GetCertificates("COLLECTION").GetMatches(this.timeStampToken.SignerID);
+            IEnumerable<Org.BouncyCastle.X509.X509Certificate> signerCerts = cmsSignedData.GetCertificates().EnumerateMatches(this.timeStampToken.SignerID);
 
             foreach (Org.BouncyCastle.X509.X509Certificate cert in signerCerts)
             {

@@ -1,5 +1,5 @@
-﻿/*
-*  Copyright 2016-2021 Disig a.s.
+/*
+*  Copyright 2016-2026 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -19,29 +19,18 @@
 *  Marek KLEIN <kleinmrk@gmail.com>
 */
 
-using Eto.Forms;
-
 namespace Disig.TimeStampClient.Gui
 {
-    internal class ComboItemCertReq : IListItem
-    {
-        public ComboItemCertReq(bool value)
+    internal class ComboItemFormat : IComboItem
+    {        
+        public ComboItemFormat(string text, SharedUtils.ResultFormat format)
         {
-            this.Value = value;
-
-            if (value)
-            {
-                this.Key = true.ToString();
-                this.Text = "Yes";
-            }
-            else
-            {
-                this.Key = false.ToString();
-                this.Text = "No";
-            }
+            this.Text = text;
+            this.Key = format.ToString();
+            this.Format = format;
         }
 
-        public bool Value
+        public SharedUtils.ResultFormat Format
         {
             get;
             set;

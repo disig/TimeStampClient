@@ -1,5 +1,5 @@
-﻿/*
-*  Copyright 2016-2021 Disig a.s.
+/*
+*  Copyright 2016-2026 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -19,23 +19,15 @@
 *  Marek KLEIN <kleinmrk@gmail.com>
 */
 
-using Eto.Forms;
-
 namespace Disig.TimeStampClient.Gui
 {
-    internal class ComboItemFormat : IListItem
-    {        
-        public ComboItemFormat(string text, SharedUtils.ResultFormat format)
+    internal class ComboItemHash : IComboItem
+    {
+        public ComboItemHash(string text, Oid value)
         {
             this.Text = text;
-            this.Key = format.ToString();
-            this.Format = format;
-        }
-
-        public SharedUtils.ResultFormat Format
-        {
-            get;
-            set;
+            this.Value = value;
+            this.Key = this.Text;
         }
 
         public string Key
@@ -50,6 +42,12 @@ namespace Disig.TimeStampClient.Gui
             set;
         }
 
+        public Oid Value
+        {
+            get;
+            set;
+        }
+        
         public override string ToString()
         {
             return this.Text;

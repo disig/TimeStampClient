@@ -2,17 +2,17 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Disig.TimeStampClient.Cmd</RootNamespace>
     <ApplicationIcon>TimeStampClient.ico</ApplicationIcon>
     <Product>TimeStampClient</Product>
-    <Version>1.2.0</Version>
+    <Version>2.0.0</Version>
     <Company>Disig a.s.</Company>
-    <Copyright>Copyright 2016-2021 Disig a.s.</Copyright>
+    <Copyright>Copyright 2016-2026 Disig a.s.</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetZip" Version="1.15.0" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
   </ItemGroup>
 
   <ItemGroup>

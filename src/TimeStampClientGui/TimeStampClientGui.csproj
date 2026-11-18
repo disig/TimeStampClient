@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Disig.TimeStampClient.Gui</RootNamespace>
+    <ApplicationIcon>TimeStampClient.ico</ApplicationIcon>
+    <Product>TimeStampClient</Product>
+    <Version>2.0.0</Version>
+    <Company>Disig a.s.</Company>
+    <Copyright>Copyright 2016-2026 Disig a.s.</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\TimeStampClientCmd\SharedUtils.cs" Link="SharedUtils.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="TimeStampClient.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TimeStampClient\TimeStampClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.6" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.6" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.6" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
+  </ItemGroup>
+
+  <!-- SkiaSharp and HarfBuzzSharp packages contain ~100 MB of native debug symbols per Windows platform -->
+  <Target Name="ExcludeNativePdbFromPublish" AfterTargets="ComputeResolvedFilesToPublishList">
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.pdb' And '%(ResolvedFileToPublish.AssetType)' == 'native'" />
+    </ItemGroup>
+  </Target>
+
+</Project>

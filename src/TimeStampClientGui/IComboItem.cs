@@ -1,5 +1,5 @@
-﻿/*
-*  Copyright 2016-2021 Disig a.s.
+/*
+*  Copyright 2016-2026 Disig a.s.
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -14,22 +14,21 @@
 *  limitations under the License.
 */
 
-/*
-*  Written by:
-*  Jaroslav IMRICH <jimrich@jimrich.sk>
-*/
-
-using System;
-using Eto.Forms;
-
 namespace Disig.TimeStampClient.Gui
 {
-    class MainClass
+    /// <summary>
+    /// Combo box item identified by key
+    /// </summary>
+    internal interface IComboItem
     {
-        [STAThread]
-        public static void Main(string[] args)
+        string Key
         {
-            new Application(Eto.Platforms.Mac64).Run(new MainForm());
+            get;
+        }
+
+        string Text
+        {
+            get;
         }
     }
 }
