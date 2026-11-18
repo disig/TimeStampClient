@@ -117,7 +117,7 @@ namespace Disig.TimeStampClient
             }
 
             byte[] digest = DigestUtils.ComputeDigest(dataToTimestamp, digestType);
-            Request request = new Request(digest, digestType.OID);
+            Request request = new Request(digest, digestType.OID, Utils.GenerateNonce());
             return RequestTST(tsaUri, request, credentials);
         }
 
@@ -400,7 +400,7 @@ namespace Disig.TimeStampClient
                     throw new TimeStampException("Invalid TS response: missing time stamp token", response.PKIStatus);
                 }
 
-                if (!Utils.CompareByteArray(response.TST.Nonce, request.Nonce))
+                if (!Utils.CompareNonces(response.TST.Nonce, request.Nonce))
                 {
                     throw new TimeStampException("Invalid TS response: nonce mismatch", response.PKIStatus);
                 }

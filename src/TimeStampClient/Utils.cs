@@ -19,6 +19,9 @@
 *  Marek KLEIN <kleinmrk@gmail.com>
 */
 
+using System.Security.Cryptography;
+using Org.BouncyCastle.Math;
+
 namespace Disig.TimeStampClient
 {
     /// <summary>
@@ -61,6 +64,45 @@ namespace Disig.TimeStampClient
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Compares nonces as integers so that differences in their encoding (e.g. redundant leading bytes) are ignored.
+        /// </summary>
+        /// <param name="a">first nonce</param>
+        /// <param name="b">second nonce</param>
+        /// <returns>true if nonces are equal or both are missing. Otherwise returns false.</returns>
+        internal static bool CompareNonces(byte[] a, byte[] b)
+        {
+            if (null == a && null == b)
+            {
+                return true;
+            }
+
+            if (null == a || null == b || 0 == a.Length || 0 == b.Length)
+            {
+                return false;
+            }
+
+            return new BigInteger(a).Equals(new BigInteger(b));
+        }
+
+        /// <summary>
+        /// Generates random nonce.
+        /// </summary>
+        /// <returns>Nonce bytes representing a positive integer.</returns>
+        internal static byte[] GenerateNonce()
+        {
+            byte[] nonce = new byte[10];
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(nonce);
+            }
+
+            // Clear the sign bit so that the nonce is a positive integer
+            nonce[0] &= 0x7F;
+
+            return nonce;
         }
     }
 }
