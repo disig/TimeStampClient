@@ -166,7 +166,7 @@ namespace Disig.TimeStampClient.Cmd
             Console.WriteLine(@"      --file ""file_to_timestamp""");
             Console.WriteLine(@"      --tsa ""tsa_service_address""");
             Console.WriteLine(@"      --out ""file_to_save_timestamp""");
-            Console.WriteLine(@"      [--hash ""sha1 | sha256 | sha512 | md5""]");
+            Console.WriteLine(@"      [--hash ""sha1 | sha256 | sha384 | sha512 | md5""]");
             Console.WriteLine(@"      [--policy ""policy_oid""]");
             Console.WriteLine(@"      [--nonce ""1234567890ABCDEF""]");
             Console.WriteLine(@"      [--cert-req]");

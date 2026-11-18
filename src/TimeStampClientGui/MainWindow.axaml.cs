@@ -47,6 +47,7 @@ namespace Disig.TimeStampClient.Gui
             {
                 new ComboItemHash("SHA-1", Oid.SHA1),
                 new ComboItemHash("SHA-256", Oid.SHA256),
+                new ComboItemHash("SHA-384", Oid.SHA384),
                 new ComboItemHash("SHA-512", Oid.SHA512),
                 new ComboItemHash("MD5", Oid.MD5),
             };

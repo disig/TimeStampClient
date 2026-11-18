@@ -52,6 +52,10 @@ namespace Disig.TimeStampClient
                 {
                     digestAlg = new SHA256Managed();
                 }
+                else if (Oid.SHA384 == digestType)
+                {
+                    digestAlg = new SHA384Managed();
+                }
                 else if (Oid.SHA512 == digestType)
                 {
                     digestAlg = new SHA512Managed();
@@ -65,7 +69,7 @@ namespace Disig.TimeStampClient
             }
             finally
             {
-                digestAlg.Dispose();
+                digestAlg?.Dispose();
             }
         }
 

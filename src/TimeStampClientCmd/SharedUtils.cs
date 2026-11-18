@@ -66,6 +66,9 @@ namespace Disig.TimeStampClient
                 case "sha256":
                     hashOid = Oid.SHA256;
                     break;
+                case "sha384":
+                    hashOid = Oid.SHA384;
+                    break;
                 case "sha512":
                     hashOid = Oid.SHA512;
                     break;

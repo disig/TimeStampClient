@@ -19,8 +19,6 @@
 *  Marek KLEIN <kleinmrk@gmail.com>
 */
 
-using System.Collections.Generic;
-
 namespace Disig.TimeStampClient
 {
     /// <summary>
@@ -47,6 +45,11 @@ namespace Disig.TimeStampClient
         /// Object identifier for the SHA256 algorithm.
         /// </summary>
         public static readonly Oid SHA256 = new Oid("2.16.840.1.101.3.4.2.1");
+
+        /// <summary>
+        /// Object identifier for the SHA384 algorithm.
+        /// </summary>
+        public static readonly Oid SHA384 = new Oid("2.16.840.1.101.3.4.2.2");
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Oid"/> class.
