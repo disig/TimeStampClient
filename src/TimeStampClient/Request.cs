@@ -40,35 +40,45 @@ namespace Disig.TimeStampClient
     */
 
     /// <summary>
-    /// Time stamp request
+    /// Time-stamp request according to RFC 3161.
     /// </summary>
     public class Request
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Request"/> class.
         /// </summary>
-        /// <param name="hashedMessage">This field contains the hash of the data to be time-stamped.</param>
-        /// <param name="hashAlgOid">The hash algorithm identifier.</param>
-        /// <param name="nonce">Cryptographic nonce preventing replay attack.</param>
-        /// <param name="reqPolicy">Requested policy.</param>
+        /// <param name="hashedMessage">Hash of the data to be time-stamped.</param>
+        /// <param name="hashAlgOid">OID of the hash algorithm used to compute <paramref name="hashedMessage"/>.</param>
+        /// <param name="nonce">Cryptographic nonce preventing replay attack, encoded as big-endian two's complement integer. No nonce is included in the request if null.</param>
+        /// <param name="reqPolicy">OID of the requested TSA policy. No policy is requested if null or empty.</param>
         /// <param name="certReq">Flag indicating that a TSA should include its certificate in a response.</param>
-        /// <param name="version">The version of the time stamp request.</param>
+        /// <param name="version">The version of the time-stamp request. Only version 1 is supported.</param>
         public Request(byte[] hashedMessage, string hashAlgOid, byte[] nonce = null, string reqPolicy = null, bool certReq = false, int version = 1)
         {
+            if (1 != version)
+            {
+                throw new ArgumentOutOfRangeException("version", version, "Only version 1 of time-stamp request is supported");
+            }
+
             this.Setup(hashedMessage, hashAlgOid, nonce, reqPolicy, certReq, version);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Request"/> class.
         /// </summary>
-        /// <param name="hashedMessage">This field contains the hash of the data to be time-stamped.</param>
-        /// <param name="hashAlg">The hash algorithm identifier.</param>
-        /// <param name="nonce">Cryptographic nonce preventing replay attack.</param>
-        /// <param name="reqPolicy">Requested policy.</param>
-        /// <param name="certReq">Flag indicating that TSA should include its certificate in a response.</param>
-        /// <param name="version">The version of the time stamp request.</param>
+        /// <param name="hashedMessage">Hash of the data to be time-stamped.</param>
+        /// <param name="hashAlg">The hash algorithm used to compute <paramref name="hashedMessage"/>.</param>
+        /// <param name="nonce">Cryptographic nonce preventing replay attack, encoded as big-endian two's complement integer. No nonce is included in the request if null.</param>
+        /// <param name="reqPolicy">OID of the requested TSA policy. No policy is requested if null or empty.</param>
+        /// <param name="certReq">Flag indicating that a TSA should include its certificate in a response.</param>
+        /// <param name="version">The version of the time-stamp request. Only version 1 is supported.</param>
         public Request(byte[] hashedMessage, Oid hashAlg, byte[] nonce = null, string reqPolicy = null, bool certReq = false, int version = 1)
         {
+            if (1 != version)
+            {
+                throw new ArgumentOutOfRangeException("version", version, "Only version 1 of time-stamp request is supported");
+            }
+
             if (null != hashAlg)
             {
                 this.Setup(hashedMessage, hashAlg.OID, nonce, reqPolicy, certReq, version);
@@ -82,11 +92,17 @@ namespace Disig.TimeStampClient
         /// <summary>
         /// Initializes a new instance of the <see cref="Request"/> class.
         /// </summary>
-        /// <param name="tsrBytes">DER encoded time stamp request</param>
+        /// <param name="tsrBytes">DER encoded time-stamp request.</param>
         public Request(byte[] tsrBytes)
         {
             TimeStampRequest req;
             req = new TimeStampRequest(tsrBytes);
+
+            if (1 != req.Version)
+            {
+                throw new ArgumentException("Only version 1 of time-stamp request is supported", "tsrBytes");
+            }
+
             byte[] nonce = null;
             if (null != req.Nonce)
             {
@@ -97,7 +113,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets the version of a time stamp request.
+        /// Gets the version of a time-stamp request.
         /// </summary>
         public int Version
         {
@@ -106,7 +122,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets the requested policy (OID).
+        /// Gets the OID of the requested TSA policy.
         /// </summary>
         public string ReqPolicy
         {
@@ -115,8 +131,8 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets Nonce, a large random number with a high probability that it is generated by the client only once.
-        /// Prevents replay attack.
+        /// Gets the nonce, a large random number with a high probability that it is generated by the client only once.
+        /// Prevents replay attack. Null if the request does not contain nonce.
         /// </summary>
         public byte[] Nonce
         {
@@ -134,7 +150,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets the hash algorithm identifier.
+        /// Gets the OID of the hash algorithm.
         /// </summary>
         public string HashAlgorithm
         {
@@ -156,7 +172,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets the structure containing the hash of the data to be time-stamped and the algorithm identifier used to compute the hash. 
+        /// Gets the structure containing the hash of the data to be time-stamped and the algorithm identifier used to compute the hash.
         /// </summary>
         internal MsgImprint MessageImprint
         {
@@ -194,12 +210,12 @@ namespace Disig.TimeStampClient
         /// <summary>
         /// Sets properties of the <see cref="Request"/> class.
         /// </summary>
-        /// <param name="hashedMessage">This field contains the hash of the data to be time-stamped.</param>
-        /// <param name="hashAlgOid">The hash algorithm identifier.</param>
+        /// <param name="hashedMessage">Hash of the data to be time-stamped.</param>
+        /// <param name="hashAlgOid">OID of the hash algorithm used to compute <paramref name="hashedMessage"/>.</param>
         /// <param name="nonce">Cryptographic nonce preventing replay attack.</param>
-        /// <param name="reqPolicy">Requested policy.</param>
-        /// <param name="certReq">The flag indicating that TSA should include its certificate in a response.</param>
-        /// <param name="version">The version of the time stamp request.</param>
+        /// <param name="reqPolicy">OID of the requested TSA policy.</param>
+        /// <param name="certReq">Flag indicating that a TSA should include its certificate in a response.</param>
+        /// <param name="version">The version of the time-stamp request.</param>
         private void Setup(byte[] hashedMessage, string hashAlgOid, byte[] nonce = null, string reqPolicy = null, bool certReq = false, int version = 1)
         {
             this.Version = version;

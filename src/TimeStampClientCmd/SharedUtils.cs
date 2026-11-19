@@ -170,8 +170,20 @@ namespace Disig.TimeStampClient
                 logger(string.Format("    Time: {0:dd MMM yyyy HH':'mm':'ss 'GMT'}", (token.Time).ToUniversalTime()));
 
                 logger(string.Format("TSA certificate:"));
-                logger(string.Format("    Issuer: {0}", token.TsaInformation.TsaCertIssuerName.Name));
-                logger(string.Format("    Serial: {0}", SharedUtils.BytesToHexString(token.TsaInformation.TsaCertSerialNumber)));
+                if (null != token.TsaInformation.TsaCertIssuerName)
+                {
+                    logger(string.Format("    Issuer: {0}", token.TsaInformation.TsaCertIssuerName.Name));
+                }
+
+                if (null != token.TsaInformation.TsaCertSerialNumber)
+                {
+                    logger(string.Format("    Serial: {0}", SharedUtils.BytesToHexString(token.TsaInformation.TsaCertSerialNumber)));
+                }
+
+                if (null != token.TsaInformation.TsaCertSubjectKeyIdentifier)
+                {
+                    logger(string.Format("    Subject key identifier: {0}", SharedUtils.BytesToHexString(token.TsaInformation.TsaCertSubjectKeyIdentifier)));
+                }
 
                 if (null != token.TsaInformation.TsaCert)
                 {

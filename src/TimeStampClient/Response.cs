@@ -25,11 +25,11 @@ using System;
 namespace Disig.TimeStampClient
 {
     /// <summary>
-    /// Time stamp response
+    /// Time-stamp response.
     /// </summary>
     internal class Response
     {
-        #region Timestamp reponse according to RFC3161
+        #region Time-stamp response according to RFC 3161
         /*
             TimeStampResp::= SEQUENCE  {
                 status          PKIStatusInfo,
@@ -110,7 +110,7 @@ namespace Disig.TimeStampClient
         /// <summary>
         /// Initializes a new instance of the <see cref="Response"/> class.
         /// </summary>
-        /// <param name="response">DER encoded time stamp response.</param>
+        /// <param name="response">DER encoded time-stamp response.</param>
         public Response(byte[] response)
         {
             if (null == response)
@@ -122,17 +122,12 @@ namespace Disig.TimeStampClient
 
             if (null != this.response.TimeStampToken)
             {
-                // NOTICE: this.response.TimeStampToken.GetEncoded() returns malformed byte array; therefore, we use low level interface
-                // this.TST = new TimeStampToken(this.response.TimeStampToken.GetEncoded());
-                Org.BouncyCastle.Asn1.Tsp.TimeStampResp asn1Response = Org.BouncyCastle.Asn1.Tsp.TimeStampResp.GetInstance(Org.BouncyCastle.Asn1.Asn1Sequence.FromByteArray(response));
-                var derTst = asn1Response.TimeStampToken.GetDerEncoded();
-
-                this.TST = new TimeStampToken(derTst);
+                this.TST = new TimeStampToken(this.response.TimeStampToken.GetEncoded(Org.BouncyCastle.Asn1.Asn1Encodable.Der));
             }
         }
 
         /// <summary>
-        /// Gets PKIStatus
+        /// Gets the PKI status of the response.
         /// </summary>
         public PkiStatus PKIStatus
         {
@@ -199,6 +194,9 @@ namespace Disig.TimeStampClient
             }
         }
 
+        /// <summary>
+        /// Gets or sets the time-stamp token included in the response, or null if the response does not contain it.
+        /// </summary>
         internal TimeStampToken TST
         {
             get;

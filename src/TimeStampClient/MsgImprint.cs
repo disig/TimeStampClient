@@ -51,7 +51,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets the hash identifier.
+        /// Gets the hash algorithm identifier (OID).
         /// </summary>
         internal string HashAlgorithm
         {
@@ -60,7 +60,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets the The hashed message.
+        /// Gets the hashed message.
         /// </summary>
         internal byte[] HashedMessage
         {

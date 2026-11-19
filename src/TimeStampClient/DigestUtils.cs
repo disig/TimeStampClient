@@ -25,7 +25,7 @@ using System.Security.Cryptography;
 namespace Disig.TimeStampClient
 {
     /// <summary>
-    /// Digest helper methods.
+    /// Helper methods for computing digests of data.
     /// </summary>
     public static class DigestUtils
     {
@@ -34,7 +34,7 @@ namespace Disig.TimeStampClient
         /// </summary>
         /// <param name="dataStream">Data stream to compute digest for.</param>
         /// <param name="digestType">Defines hash algorithm to be used to compute digest.</param>
-        /// <returns>digest stored in a byte array</returns>
+        /// <returns>Digest stored in a byte array.</returns>
         public static byte[] ComputeDigest(Stream dataStream, Oid digestType)
         {
             HashAlgorithm digestAlg = null;
@@ -78,7 +78,7 @@ namespace Disig.TimeStampClient
         /// </summary>
         /// <param name="pathToFile">Path to file to compute digest for.</param>
         /// <param name="digestType">Defines hash algorithm to be used to compute digest.</param>
-        /// <returns>digest stored in a byte array</returns>
+        /// <returns>Digest stored in a byte array.</returns>
         public static byte[] ComputeDigest(string pathToFile, Oid digestType)
         {
             using (FileStream fs = new FileStream(pathToFile, FileMode.Open, FileAccess.Read))
@@ -92,7 +92,7 @@ namespace Disig.TimeStampClient
         /// </summary>
         /// <param name="data">Data to compute digest for.</param>
         /// <param name="digestType">Defines hash algorithm to be used to compute digest.</param>
-        /// <returns>digest stored in a byte array</returns>
+        /// <returns>Digest stored in a byte array.</returns>
         public static byte[] ComputeDigest(byte[] data, Oid digestType)
         {
             using (MemoryStream ms = new MemoryStream(data))
