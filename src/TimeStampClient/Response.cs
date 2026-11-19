@@ -122,12 +122,7 @@ namespace Disig.TimeStampClient
 
             if (null != this.response.TimeStampToken)
             {
-                // NOTICE: this.response.TimeStampToken.GetEncoded() returns malformed byte array; therefore, we use low level interface
-                // this.TST = new TimeStampToken(this.response.TimeStampToken.GetEncoded());
-                Org.BouncyCastle.Asn1.Tsp.TimeStampResp asn1Response = Org.BouncyCastle.Asn1.Tsp.TimeStampResp.GetInstance(Org.BouncyCastle.Asn1.Asn1Sequence.FromByteArray(response));
-                var derTst = asn1Response.TimeStampToken.GetDerEncoded();
-
-                this.TST = new TimeStampToken(derTst);
+                this.TST = new TimeStampToken(this.response.TimeStampToken.GetEncoded(Org.BouncyCastle.Asn1.Asn1Encodable.Der));
             }
         }
 
