@@ -36,16 +36,22 @@ namespace Disig.TimeStampClient
         /// <param name="cert">Signing certificate of the TSA, or null if not available.</param>
         internal TsaId(SignerID signerID, X509Certificate2 cert)
         {
-            this.TsaCertSerialNumber = signerID.SerialNumber.ToByteArray();
+            // Signer is identified either by issuer name and serial number or by subject key identifier (RFC 5652, section 5.3)
+            if (null != signerID.SerialNumber)
+                this.TsaCertSerialNumber = signerID.SerialNumber.ToByteArray();
+
             this.TsaCertSubjectKeyIdentifier = signerID.SubjectKeyIdentifier;
-            this.TsaCertIssuerName = new X500DistinguishedName(signerID.Issuer.GetEncoded());
+
+            if (null != signerID.Issuer)
+                this.TsaCertIssuerName = new X500DistinguishedName(signerID.Issuer.GetEncoded());
 
             if (null != cert)
                 TsaCert = cert;
         }
 
         /// <summary>
-        /// Gets the issuer name of the TSA certificate used to sign the time-stamp token.
+        /// Gets the issuer name of the TSA certificate used to sign the time-stamp token,
+        /// or null if the signer is identified by subject key identifier.
         /// </summary>
         public X500DistinguishedName TsaCertIssuerName
         {
@@ -54,7 +60,8 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets the serial number of the TSA certificate used to sign the time-stamp token.
+        /// Gets the serial number of the TSA certificate used to sign the time-stamp token,
+        /// or null if the signer is identified by subject key identifier.
         /// </summary>
         public byte[] TsaCertSerialNumber
         {
