@@ -410,22 +410,16 @@ namespace Disig.TimeStampClient
                 }
             }
 
-            Stream reqStream = httpReq.GetRequestStream();
-            reqStream.Write(tsr, 0, tsr.Length);
-            reqStream.Close();
-            WebResponse httpResp = httpReq.GetResponse();
-            Stream respStream = httpResp.GetResponseStream();
+            using (Stream reqStream = httpReq.GetRequestStream())
+            {
+                reqStream.Write(tsr, 0, tsr.Length);
+            }
 
-            byte[] buffer = new byte[16 * 1024];
+            using (WebResponse httpResp = httpReq.GetResponse())
+            using (Stream respStream = httpResp.GetResponseStream())
             using (MemoryStream ms = new MemoryStream())
             {
-                int read;
-                while ((read = respStream.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-
-                respStream.Close();
+                respStream.CopyTo(ms);
                 return ms.ToArray();
             }
         }
