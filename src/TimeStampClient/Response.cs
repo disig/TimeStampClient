@@ -29,7 +29,7 @@ namespace Disig.TimeStampClient
     /// </summary>
     internal class Response
     {
-        #region Timestamp reponse according to RFC3161
+        #region Time-stamp response according to RFC 3161
         /*
             TimeStampResp::= SEQUENCE  {
                 status          PKIStatusInfo,
