@@ -20,7 +20,7 @@
 */
 
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Disig.TimeStampClient
@@ -57,13 +57,12 @@ namespace Disig.TimeStampClient
 
             X509Certificate2 tsaCert = null;
             Org.BouncyCastle.Cms.SignerID signerId = this.timeStampToken.SignerID;
-            Org.BouncyCastle.Cms.CmsSignedData cmsSignedData = new Org.BouncyCastle.Cms.CmsSignedData(this.timeStampToken.GetEncoded());
-            IEnumerable<Org.BouncyCastle.X509.X509Certificate> signerCerts = cmsSignedData.GetCertificates().EnumerateMatches(this.timeStampToken.SignerID);
-
-            foreach (Org.BouncyCastle.X509.X509Certificate cert in signerCerts)
+            Org.BouncyCastle.X509.X509Certificate signerCert = this.timeStampToken.GetCertificates().EnumerateMatches(signerId).FirstOrDefault();
+            if (null != signerCert)
             {
-                tsaCert = new X509Certificate2(cert.GetEncoded());
+                tsaCert = new X509Certificate2(signerCert.GetEncoded());
             }
+
             this.TsaInformation = new TsaId(signerId, tsaCert);
         }
 
