@@ -40,7 +40,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// 
+        /// Gets the issuer name of the TSA certificate used to sign the time stamp token.
         /// </summary>
         public X500DistinguishedName TsaCertIssuerName
         {
@@ -49,7 +49,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// 
+        /// Gets the serial number of the TSA certificate used to sign the time stamp token.
         /// </summary>
         public byte[] TsaCertSerialNumber
         {
@@ -58,7 +58,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// 
+        /// Gets the subject key identifier of the TSA certificate used to sign the time stamp token.
         /// </summary>
         public byte[] TsaCertSubjectKeyIdentifier
         {
