@@ -216,11 +216,11 @@ namespace Disig.TimeStampClient
         /// Requests time-stamp for the file specified by the path.
         /// </summary>
         /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
-        /// <param name="pathToFile">Specifies the file to time-stamp.</param>
+        /// <param name="pathToFileToTimestamp">Specifies the file to time-stamp.</param>
         /// <returns>Time-stamp token.</returns>
-        public static TimeStampToken RequestTimeStampToken(string tsaUri, string pathToFile)
+        public static TimeStampToken RequestTimeStampToken(string tsaUri, string pathToFileToTimestamp)
         {
-            return RequestTimeStampToken(tsaUri, pathToFile, null, null);
+            return RequestTimeStampToken(tsaUri, pathToFileToTimestamp, null, null);
         }
 
         /// <summary>
