@@ -70,12 +70,12 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets or sets information about the time-stamp authority that issued the token.
+        /// Gets information about the time-stamp authority that issued the token.
         /// </summary>
         public TsaId TsaInformation
         {
             get;
-            set;
+            private set;
         }
 
         /// <summary>
