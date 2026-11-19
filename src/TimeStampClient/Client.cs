@@ -44,9 +44,9 @@ namespace Disig.TimeStampClient
         private const int TcpTimeout = 100000;
 
         /// <summary>
-        /// Maximum accepted length of TCP message.
+        /// Maximum accepted length of time-stamp response (HTTP response body or TCP message).
         /// </summary>
-        private const int MaxTcpMessageLength = 1024 * 1024;
+        private const int MaxResponseLength = 1024 * 1024;
 
         /// <summary>
         /// TCP message flag: message contains TimeStampReq.
@@ -291,7 +291,16 @@ namespace Disig.TimeStampClient
                     throw new TimeStampException("Unknown protocol.");
             }
 
-            Response response = new Response(responseBytes);
+            Response response;
+            try
+            {
+                response = new Response(responseBytes);
+            }
+            catch (Exception e)
+            {
+                throw new TimeStampException("Invalid TS response: unable to parse response", e);
+            }
+
             ValidateResponse(request, response);
             return response.TST;
         }
@@ -326,7 +335,7 @@ namespace Disig.TimeStampClient
 
                     byte[] header = ReadExactly(networkStream, 5);
                     int respLen = (header[0] << 24) | (header[1] << 16) | (header[2] << 8) | header[3];
-                    if (respLen < 1 || respLen > MaxTcpMessageLength)
+                    if (respLen < 1 || respLen > MaxResponseLength)
                     {
                         throw new TimeStampException(string.Format(CultureInfo.InvariantCulture, "Invalid TCP response: invalid message length {0}", respLen));
                     }
@@ -416,10 +425,49 @@ namespace Disig.TimeStampClient
             }
 
             using (WebResponse httpResp = httpReq.GetResponse())
-            using (Stream respStream = httpResp.GetResponseStream())
+            {
+                // Content type is not checked strictly because some TSAs do not send "application/timestamp-reply",
+                // but textual content (e.g. HTML error page) is never a valid time stamp response
+                string contentType = httpResp.ContentType;
+                if (null != contentType && contentType.TrimStart().StartsWith("text/", StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new TimeStampException(string.Format(CultureInfo.InvariantCulture, "Invalid TS response: unexpected content type {0}", contentType));
+                }
+
+                if (httpResp.ContentLength > MaxResponseLength)
+                {
+                    throw new TimeStampException(string.Format(CultureInfo.InvariantCulture, "Invalid TS response: response length {0} exceeds the limit", httpResp.ContentLength));
+                }
+
+                using (Stream respStream = httpResp.GetResponseStream())
+                {
+                    return ReadToEnd(respStream, MaxResponseLength);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reads all bytes from stream up to the specified limit.
+        /// </summary>
+        /// <param name="stream">Stream to read from.</param>
+        /// <param name="maxLength">Maximum number of bytes to read.</param>
+        /// <returns>Bytes read from stream.</returns>
+        private static byte[] ReadToEnd(Stream stream, int maxLength)
+        {
+            byte[] buffer = new byte[16 * 1024];
             using (MemoryStream ms = new MemoryStream())
             {
-                respStream.CopyTo(ms);
+                int read;
+                while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    if (ms.Length + read > maxLength)
+                    {
+                        throw new TimeStampException("Invalid TS response: response length exceeds the limit");
+                    }
+
+                    ms.Write(buffer, 0, read);
+                }
+
                 return ms.ToArray();
             }
         }
