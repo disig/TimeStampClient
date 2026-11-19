@@ -25,7 +25,7 @@ using System;
 namespace Disig.TimeStampClient
 {
     /// <summary>
-    /// Time stamp response
+    /// Time-stamp response.
     /// </summary>
     internal class Response
     {
@@ -110,7 +110,7 @@ namespace Disig.TimeStampClient
         /// <summary>
         /// Initializes a new instance of the <see cref="Response"/> class.
         /// </summary>
-        /// <param name="response">DER encoded time stamp response.</param>
+        /// <param name="response">DER encoded time-stamp response.</param>
         public Response(byte[] response)
         {
             if (null == response)
@@ -127,7 +127,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets PKIStatus
+        /// Gets the PKI status of the response.
         /// </summary>
         public PkiStatus PKIStatus
         {
@@ -194,6 +194,9 @@ namespace Disig.TimeStampClient
             }
         }
 
+        /// <summary>
+        /// Gets or sets the time-stamp token included in the response, or null if the response does not contain it.
+        /// </summary>
         internal TimeStampToken TST
         {
             get;

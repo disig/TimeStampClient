@@ -26,7 +26,7 @@ using System.Runtime.Serialization;
 namespace Disig.TimeStampClient
 {
     /// <summary>
-    /// Time stamp exception class.
+    /// Exception thrown when time-stamping fails.
     /// </summary>
     [Serializable]
     public class TimeStampException : Exception
@@ -84,7 +84,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimeStampException"/> class with the specified error message, nested exception and PKI status code.
+        /// Initializes a new instance of the <see cref="TimeStampException"/> class with the specified error message and PKI status code.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         /// <param name="statusCode">PKI status code.</param>
@@ -125,8 +125,12 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets or sets PKIStatus.
+        /// Gets or sets the PKI status of the time-stamp response.
         /// </summary>
+        /// <remarks>
+        /// If the exception was not caused by the processing of a time-stamp response (e.g. unsupported URI scheme or invalid TCP response),
+        /// the property contains the default value <see cref="PkiStatus.Granted"/>.
+        /// </remarks>
         public PkiStatus PKIStatus
         {
             get;
@@ -134,7 +138,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets or sets PKIStatusString. 
+        /// Gets or sets the additional status information (PKIFreeText) returned by TSA, or null if not available.
         /// </summary>
         public string PKIStatusString
         {
@@ -143,7 +147,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets or sets PKIFailure info. If present, indicates the error that occurred while time-stamping data.
+        /// Gets or sets the reason why the time-stamp request was rejected, or null if not provided by TSA.
         /// </summary>
         public PkiFailureInfo? PKIFailureInfo
         {

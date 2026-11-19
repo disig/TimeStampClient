@@ -22,7 +22,7 @@
 namespace Disig.TimeStampClient
 {
     /// <summary>
-    /// Reason why the time-stamp request was rejected.
+    /// Reason why the time-stamp request was rejected (PKIFailureInfo according to RFC 3161).
     /// </summary>
     public enum PkiFailureInfo
     {
@@ -67,7 +67,7 @@ namespace Disig.TimeStampClient
         SystemFailure = 25,
 
         /// <summary>
-        /// Unknown status.
+        /// Unknown or unsupported failure info.
         /// </summary>
         Unknown = -1
     }

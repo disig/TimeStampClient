@@ -29,8 +29,12 @@ using System.Text;
 namespace Disig.TimeStampClient
 {
     /// <summary>
-    /// Provides interface to time-stamp data.
+    /// Provides methods for requesting time-stamp tokens from a TSA service according to RFC 3161.
     /// </summary>
+    /// <remarks>
+    /// The PKI status of the received time-stamp response is checked and the time-stamp token is checked to match the request
+    /// (nonce, requested policy and message imprint). The signature of the time-stamp token and the TSA certificate are not validated.
+    /// </remarks>
     public static class TimeStampClient
     {
         /// <summary>
@@ -66,12 +70,12 @@ namespace Disig.TimeStampClient
         #region RequestTimeStamp
 
         /// <summary>
-        /// Requests time stamp for the specified time stamp request.
+        /// Requests time-stamp for the specified time-stamp request.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
-        /// <param name="request">The time stamp request.</param>
-        /// <param name="credentials">User's credentials to access TSA service.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
+        /// <param name="request">The time-stamp request.</param>
+        /// <param name="credentials">User's credentials to access TSA service. Used only with http and https schemes.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, Request request, UserCredentials credentials = null)
         {
             if (null == request)
@@ -88,48 +92,48 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Requests time stamp for the data from stream.
+        /// Requests time-stamp for the data from stream.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="dataToTimestamp">Specifies the data to time-stamp.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, Stream dataToTimestamp)
         {
             return RequestTimeStampToken(tsaUri, dataToTimestamp, null, null);
         }
 
         /// <summary>
-        /// Requests time stamp for the data from stream.
+        /// Requests time-stamp for the data from stream.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="dataToTimestamp">Specifies the data to time-stamp.</param>
-        /// <param name="credentials">User's credentials to access TSA service.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="credentials">User's credentials to access TSA service. Used only with http and https schemes.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, Stream dataToTimestamp, UserCredentials credentials)
         {
             return RequestTimeStampToken(tsaUri, dataToTimestamp, null, credentials);
         }
 
         /// <summary>
-        /// Requests time stamp for the data from stream.
+        /// Requests time-stamp for the data from stream.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="dataToTimestamp">Specifies the data to time-stamp.</param>
-        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data. SHA-512 is used if null.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, Stream dataToTimestamp, Oid digestType)
         {
             return RequestTimeStampToken(tsaUri, dataToTimestamp, digestType, null);
         }
 
         /// <summary>
-        /// Requests time stamp for the data from stream.
+        /// Requests time-stamp for the data from stream.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="dataToTimestamp">Specifies the data to time-stamp.</param>
-        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data.</param>
-        /// <param name="credentials">User's credentials to access TSA service.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data. SHA-512 is used if null.</param>
+        /// <param name="credentials">User's credentials to access TSA service. Used only with http and https schemes.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, Stream dataToTimestamp, Oid digestType, UserCredentials credentials)
         {
             if (null == tsaUri)
@@ -153,48 +157,48 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Requests time stamp for the data stored in the byte array.
+        /// Requests time-stamp for the data stored in the byte array.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="dataToTimestamp">Specifies the data to time-stamp.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, byte[] dataToTimestamp)
         {
             return RequestTimeStampToken(tsaUri, dataToTimestamp, null, null);
         }
 
         /// <summary>
-        /// Requests time stamp for the data stored in the byte array.
+        /// Requests time-stamp for the data stored in the byte array.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="dataToTimestamp">Specifies the data to time-stamp.</param>
-        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data. SHA-512 is used if null.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, byte[] dataToTimestamp, Oid digestType)
         {
             return RequestTimeStampToken(tsaUri, dataToTimestamp, digestType, null);
         }
 
         /// <summary>
-        /// Requests time stamp for the data stored in the byte array.
+        /// Requests time-stamp for the data stored in the byte array.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="dataToTimestamp">Specifies the data to time-stamp.</param>
-        /// <param name="credentials">User's credentials to access TSA service.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="credentials">User's credentials to access TSA service. Used only with http and https schemes.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, byte[] dataToTimestamp, UserCredentials credentials)
         {
             return RequestTimeStampToken(tsaUri, dataToTimestamp, null, credentials);
         }
 
         /// <summary>
-        /// Requests time stamp for the data stored in the byte array.
+        /// Requests time-stamp for the data stored in the byte array.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="dataToTimestamp">Specifies the data to time-stamp.</param>
-        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data.</param>
-        /// <param name="credentials">User's credentials to access TSA service.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data. SHA-512 is used if null.</param>
+        /// <param name="credentials">User's credentials to access TSA service. Used only with http and https schemes.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, byte[] dataToTimestamp, Oid digestType, UserCredentials credentials)
         {
             if (null == dataToTimestamp)
@@ -209,24 +213,24 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Requests time stamp for the file specified by the path.
+        /// Requests time-stamp for the file specified by the path.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="pathToFile">Specifies the file to time-stamp.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, string pathToFile)
         {
             return RequestTimeStampToken(tsaUri, pathToFile, null, null);
         }
 
         /// <summary>
-        /// Requests time stamp for the file specified by the path.
+        /// Requests time-stamp for the file specified by the path.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="pathToFileToTimestamp">Specifies the file to time-stamp.</param>
-        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data.</param>
-        /// <param name="credentials">User's credentials to access TSA service.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data. SHA-512 is used if null.</param>
+        /// <param name="credentials">User's credentials to access TSA service. Used only with http and https schemes.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, string pathToFileToTimestamp, Oid digestType, UserCredentials credentials)
         {
             if (null == pathToFileToTimestamp)
@@ -241,24 +245,24 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Requests time stamp for the file specified by the path.
+        /// Requests time-stamp for the file specified by the path.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="pathToFileToTimestamp">Specifies the file to time-stamp.</param>
-        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="digestType">Specifies the hash algorithm to be used to compute digest from data. SHA-512 is used if null.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, string pathToFileToTimestamp, Oid digestType)
         {
             return RequestTimeStampToken(tsaUri, pathToFileToTimestamp, digestType, null);
         }
 
         /// <summary>
-        /// Requests time stamp for the file specified by the path.
+        /// Requests time-stamp for the file specified by the path.
         /// </summary>
-        /// <param name="tsaUri">URL of a TSA service.</param>
+        /// <param name="tsaUri">URL of a TSA service. Supported schemes are http, https and tcp (default port 318).</param>
         /// <param name="pathToFileToTimestamp">Specifies the file to time-stamp.</param>
-        /// <param name="credentials">User's credentials to access TSA service.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <param name="credentials">User's credentials to access TSA service. Used only with http and https schemes.</param>
+        /// <returns>Time-stamp token.</returns>
         public static TimeStampToken RequestTimeStampToken(string tsaUri, string pathToFileToTimestamp, UserCredentials credentials)
         {
             return RequestTimeStampToken(tsaUri, pathToFileToTimestamp, null, credentials);
@@ -267,12 +271,12 @@ namespace Disig.TimeStampClient
         #endregion
 
         /// <summary>
-        /// Requests time-stamp from TSA service
+        /// Requests time-stamp from TSA service.
         /// </summary>
         /// <param name="tsaUri">URL of a TSA service.</param>
         /// <param name="request">Time-stamp request.</param>
         /// <param name="credentials">User's credentials to access TSA service.</param>
-        /// <returns>Time-stamp token</returns>
+        /// <returns>Time-stamp token.</returns>
         private static TimeStampToken RequestTST(string tsaUri, Request request, UserCredentials credentials = null)
         {
             byte[] responseBytes = null;
@@ -311,8 +315,8 @@ namespace Disig.TimeStampClient
         /// Creates TCP request and processes TCP response.
         /// </summary>
         /// <param name="tsaUri">URL of a TSA service.</param>
-        /// <param name="tsr">DER encoded time stamp request.</param>
-        /// <returns>DER encoded time stamp response.</returns>
+        /// <param name="tsr">DER encoded time-stamp request.</param>
+        /// <returns>DER encoded time-stamp response.</returns>
         private static byte[] GetTcpResponse(string tsaUri, byte[] tsr)
         {
             UriBuilder urib = new UriBuilder(tsaUri);
@@ -397,9 +401,9 @@ namespace Disig.TimeStampClient
         /// Creates HTTP request and processes HTTP response.
         /// </summary>
         /// <param name="tsaUri">URL of a TSA service.</param>
-        /// <param name="tsr">DER encoded time stamp request.</param>
+        /// <param name="tsr">DER encoded time-stamp request.</param>
         /// <param name="credentials">User's credentials to access TSA service.</param>
-        /// <returns>DER encoded time stamp response</returns>
+        /// <returns>DER encoded time-stamp response.</returns>
         private static byte[] GetHttpResponse(string tsaUri, byte[] tsr, UserCredentials credentials = null)
         {
             HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(tsaUri);
@@ -475,7 +479,7 @@ namespace Disig.TimeStampClient
         #endregion
 
         /// <summary>
-        /// Validates time stamp response against time stamp request.
+        /// Validates time-stamp response against time-stamp request.
         /// </summary>
         /// <param name="request">Time-stamp request.</param>
         /// <param name="response">Time-stamp response.</param>

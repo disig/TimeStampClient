@@ -25,23 +25,26 @@ using System.Security.Cryptography.X509Certificates;
 namespace Disig.TimeStampClient
 {
     /// <summary>
-    /// User credentials class.
+    /// Credentials used to authenticate to a TSA service.
     /// </summary>
+    /// <remarks>
+    /// Credentials are used only with http and https schemes.
+    /// </remarks>
     public class UserCredentials
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserCredentials"/> class.
         /// </summary>
-        /// <param name="httpCredentials">User's certificate to access a TSA service.</param>
-        public UserCredentials(X509Certificate2 httpCredentials)
+        /// <param name="userSslCert">User's certificate for TLS client authentication to a TSA service.</param>
+        public UserCredentials(X509Certificate2 userSslCert)
         {
-            this.UserSslCert = httpCredentials;
+            this.UserSslCert = userSslCert;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserCredentials"/> class.
         /// </summary>
-        /// <param name="httpCredentials">User's network credential to access a TSA service.</param>
+        /// <param name="httpCredentials">User's network credential for HTTP authentication to a TSA service.</param>
         public UserCredentials(NetworkCredential httpCredentials)
         {
             this.HttpCredentials = httpCredentials;
@@ -50,8 +53,8 @@ namespace Disig.TimeStampClient
         /// <summary>
         /// Initializes a new instance of the <see cref="UserCredentials"/> class.
         /// </summary>
-        /// <param name="userSslCert">User's certificate to access a TSA service.</param>
-        /// <param name="httpCredentials">User's network credential to access a TSA service.</param>
+        /// <param name="userSslCert">User's certificate for TLS client authentication to a TSA service.</param>
+        /// <param name="httpCredentials">User's network credential for HTTP authentication to a TSA service.</param>
         public UserCredentials(X509Certificate2 userSslCert, NetworkCredential httpCredentials)
             : this(httpCredentials)
         {
@@ -59,7 +62,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets user's certificate.
+        /// Gets user's certificate for TLS client authentication.
         /// </summary>
         public X509Certificate2 UserSslCert
         {
@@ -68,7 +71,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets user's network credential.
+        /// Gets user's network credential for HTTP authentication.
         /// </summary>
         public NetworkCredential HttpCredentials
         {

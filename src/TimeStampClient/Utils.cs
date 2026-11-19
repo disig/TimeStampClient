@@ -25,7 +25,7 @@ using Org.BouncyCastle.Math;
 namespace Disig.TimeStampClient
 {
     /// <summary>
-    /// Utils functions.
+    /// Utility methods.
     /// </summary>
     internal static class Utils
     {

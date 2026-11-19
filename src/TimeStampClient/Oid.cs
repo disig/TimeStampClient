@@ -22,7 +22,7 @@
 namespace Disig.TimeStampClient
 {
     /// <summary>
-    /// Object identifiers.
+    /// Object identifiers of hash algorithms supported by the library.
     /// </summary>
     public sealed class Oid
     {
@@ -61,7 +61,7 @@ namespace Disig.TimeStampClient
         }
 
         /// <summary>
-        /// Gets object identifier.
+        /// Gets object identifier in dotted decimal notation.
         /// </summary>
         public string OID
         {
