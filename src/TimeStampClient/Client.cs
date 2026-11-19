@@ -24,6 +24,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace Disig.TimeStampClient
 {
@@ -32,6 +33,36 @@ namespace Disig.TimeStampClient
     /// </summary>
     public static class TimeStampClient
     {
+        /// <summary>
+        /// Default port of TCP-based time-stamp protocol (RFC 3161, section 3.3).
+        /// </summary>
+        private const int DefaultTcpPort = 318;
+
+        /// <summary>
+        /// Send and receive timeout of TCP connection in milliseconds (same as default timeout of HttpWebRequest).
+        /// </summary>
+        private const int TcpTimeout = 100000;
+
+        /// <summary>
+        /// Maximum accepted length of TCP message.
+        /// </summary>
+        private const int MaxTcpMessageLength = 1024 * 1024;
+
+        /// <summary>
+        /// TCP message flag: message contains TimeStampReq.
+        /// </summary>
+        private const byte TcpFlagTsaMsg = 0x00;
+
+        /// <summary>
+        /// TCP message flag: message contains TimeStampResp.
+        /// </summary>
+        private const byte TcpFlagFinalMsgRep = 0x05;
+
+        /// <summary>
+        /// TCP message flag: message contains human readable error message.
+        /// </summary>
+        private const byte TcpFlagErrorMsgRep = 0x06;
+
         #region RequestTimeStamp
 
         /// <summary>
@@ -275,67 +306,82 @@ namespace Disig.TimeStampClient
         /// <returns>DER encoded time stamp response.</returns>
         private static byte[] GetTcpResponse(string tsaUri, byte[] tsr)
         {
-            Stream returnStream = null;
             UriBuilder urib = new UriBuilder(tsaUri);
+            int port = (-1 == urib.Port) ? DefaultTcpPort : urib.Port;
 
-            byte[] lenByte = new byte[] { 0, 0, 0, 0, 0 };
-            int reqLen = tsr.Length + 1;
-            lenByte[0] = (byte)(reqLen >> 24);
-            lenByte[1] = (byte)(reqLen >> 16 & 255);
-            lenByte[2] = (byte)(reqLen >> 8 & 255);
-            lenByte[3] = (byte)(reqLen & 255);
-            byte[] request = new byte[tsr.Length + lenByte.Length];
+            // Message format: 4 bytes length of the remainder (big-endian), 1 byte flag, message
+            byte[] request = new byte[5 + tsr.Length];
+            WriteTcpHeader(request, tsr.Length + 1, TcpFlagTsaMsg);
+            tsr.CopyTo(request, 5);
 
-            lenByte.CopyTo(request, 0);
-            tsr.CopyTo(request, lenByte.Length);
-
-            using (TcpClient tcpClnt = new TcpClient())
+            using (TcpClient tcpClient = new TcpClient())
             {
-                tcpClnt.Connect(urib.Host, urib.Port);
-                if (tcpClnt.Connected)
+                tcpClient.SendTimeout = TcpTimeout;
+                tcpClient.ReceiveTimeout = TcpTimeout;
+                tcpClient.Connect(urib.Host, port);
+
+                using (NetworkStream networkStream = tcpClient.GetStream())
                 {
-                    using (MemoryStream respStream = new MemoryStream())
+                    networkStream.Write(request, 0, request.Length);
+
+                    byte[] header = ReadExactly(networkStream, 5);
+                    int respLen = (header[0] << 24) | (header[1] << 16) | (header[2] << 8) | header[3];
+                    if (respLen < 1 || respLen > MaxTcpMessageLength)
                     {
-                        using (NetworkStream stm = tcpClnt.GetStream())
-                        {
-                            stm.Write(request, 0, request.Length);
-                            byte[] buff = new byte[1024];
-                            int read;
-                            int offset = 5;
+                        throw new TimeStampException(string.Format(CultureInfo.InvariantCulture, "Invalid TCP response: invalid message length {0}", respLen));
+                    }
 
-                            while (0 < (read = stm.Read(buff, 0, buff.Length)))
-                            {
-                                respStream.Write(buff, offset, read - offset);
-                                offset = 0;
-                            }
-                        }
-
-                        returnStream = new BufferedStream(respStream);
-                        tcpClnt.Close();
-                        if (returnStream != null)
-                        {
-                            returnStream.Position = 0;
-                        }
-
-                        byte[] buffer = new byte[16 * 1024];
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            int read;
-                            while ((read = returnStream.Read(buffer, 0, buffer.Length)) > 0)
-                            {
-                                ms.Write(buffer, 0, read);
-                            }
-
-                            returnStream.Close();
-                            return ms.ToArray();
-                        }
+                    byte[] body = ReadExactly(networkStream, respLen - 1);
+                    switch (header[4])
+                    {
+                        case TcpFlagFinalMsgRep:
+                            return body;
+                        case TcpFlagErrorMsgRep:
+                            throw new TimeStampException("TSA returned error: " + Encoding.UTF8.GetString(body));
+                        default:
+                            throw new TimeStampException(string.Format(CultureInfo.InvariantCulture, "Invalid TCP response: unsupported message type 0x{0:X2}", header[4]));
                     }
                 }
-                else
-                {
-                    return null;
-                }
             }
+        }
+
+        /// <summary>
+        /// Writes header of TCP-based time-stamp protocol message.
+        /// </summary>
+        /// <param name="buffer">Buffer to write header to.</param>
+        /// <param name="length">Length of the remainder of the message (flag and message).</param>
+        /// <param name="flag">Message type flag.</param>
+        private static void WriteTcpHeader(byte[] buffer, int length, byte flag)
+        {
+            buffer[0] = (byte)(length >> 24);
+            buffer[1] = (byte)(length >> 16);
+            buffer[2] = (byte)(length >> 8);
+            buffer[3] = (byte)length;
+            buffer[4] = flag;
+        }
+
+        /// <summary>
+        /// Reads exact number of bytes from stream.
+        /// </summary>
+        /// <param name="stream">Stream to read from.</param>
+        /// <param name="count">Number of bytes to read.</param>
+        /// <returns>Bytes read from stream.</returns>
+        private static byte[] ReadExactly(Stream stream, int count)
+        {
+            byte[] buffer = new byte[count];
+            int offset = 0;
+            while (offset < count)
+            {
+                int read = stream.Read(buffer, offset, count - offset);
+                if (0 == read)
+                {
+                    throw new TimeStampException("Invalid TCP response: connection closed before the whole message was received");
+                }
+
+                offset += read;
+            }
+
+            return buffer;
         }
 
         /// <summary>
