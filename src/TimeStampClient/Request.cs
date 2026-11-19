@@ -52,9 +52,14 @@ namespace Disig.TimeStampClient
         /// <param name="nonce">Cryptographic nonce preventing replay attack, encoded as big-endian two's complement integer. No nonce is included in the request if null.</param>
         /// <param name="reqPolicy">OID of the requested TSA policy. No policy is requested if null or empty.</param>
         /// <param name="certReq">Flag indicating that a TSA should include its certificate in a response.</param>
-        /// <param name="version">The version of the time-stamp request.</param>
+        /// <param name="version">The version of the time-stamp request. Only version 1 is supported.</param>
         public Request(byte[] hashedMessage, string hashAlgOid, byte[] nonce = null, string reqPolicy = null, bool certReq = false, int version = 1)
         {
+            if (1 != version)
+            {
+                throw new ArgumentOutOfRangeException("version", version, "Only version 1 of time-stamp request is supported");
+            }
+
             this.Setup(hashedMessage, hashAlgOid, nonce, reqPolicy, certReq, version);
         }
 
@@ -66,9 +71,14 @@ namespace Disig.TimeStampClient
         /// <param name="nonce">Cryptographic nonce preventing replay attack, encoded as big-endian two's complement integer. No nonce is included in the request if null.</param>
         /// <param name="reqPolicy">OID of the requested TSA policy. No policy is requested if null or empty.</param>
         /// <param name="certReq">Flag indicating that a TSA should include its certificate in a response.</param>
-        /// <param name="version">The version of the time-stamp request.</param>
+        /// <param name="version">The version of the time-stamp request. Only version 1 is supported.</param>
         public Request(byte[] hashedMessage, Oid hashAlg, byte[] nonce = null, string reqPolicy = null, bool certReq = false, int version = 1)
         {
+            if (1 != version)
+            {
+                throw new ArgumentOutOfRangeException("version", version, "Only version 1 of time-stamp request is supported");
+            }
+
             if (null != hashAlg)
             {
                 this.Setup(hashedMessage, hashAlg.OID, nonce, reqPolicy, certReq, version);
@@ -87,6 +97,12 @@ namespace Disig.TimeStampClient
         {
             TimeStampRequest req;
             req = new TimeStampRequest(tsrBytes);
+
+            if (1 != req.Version)
+            {
+                throw new ArgumentException("Only version 1 of time-stamp request is supported", "tsrBytes");
+            }
+
             byte[] nonce = null;
             if (null != req.Nonce)
             {
