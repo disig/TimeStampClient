@@ -20,6 +20,7 @@
 */
 
 using System;
+using System.Globalization;
 using System.Runtime.Serialization;
 
 namespace Disig.TimeStampClient
@@ -117,7 +118,9 @@ namespace Disig.TimeStampClient
             {
                 this.PKIStatus = (PkiStatus)info.GetInt32("PKIStatus");
                 this.PKIStatusString = info.GetString("PKIStatusString");
-                this.PKIFailureInfo = (PkiFailureInfo)info.GetInt32("PKIFailureInfo");
+                // PKIFailureInfo is optional and may be serialized as null
+                object pkiFailureInfo = info.GetValue("PKIFailureInfo", typeof(object));
+                this.PKIFailureInfo = (null == pkiFailureInfo) ? (PkiFailureInfo?)null : (PkiFailureInfo)Convert.ToInt32(pkiFailureInfo, CultureInfo.InvariantCulture);
             }
         }
 
